@@ -1,0 +1,84 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" fill="#33b482" d="m256,0c-132.548,0 -240,107.452 -240,240s107.452,240 240,240s240,-107.452 240,-240s-107.452,-240 -240,-240z"/>
+  <rect id="svg_2" fill="#263740" height="104" width="8" y="16" x="260"/>
+  <path id="svg_3" fill="#CCCCCC" d="m56,512l0,-32c0,-4.4 4.256,-8 9.452,-8l397.088,0c5.196,0 9.452,3.6 9.452,8l0,32l-415.992,0z"/>
+  <g id="svg_4">
+   <path id="svg_5" fill="#B3B3B3" d="m464,472l-16,0c4.4,0 8,3.6 8,8l0,32l16,0l0,-32c0,-4.4 -3.6,-8 -8,-8z"/>
+   <rect id="svg_6" fill="#B3B3B3" height="4" width="416" y="508" x="56"/>
+  </g>
+  <rect id="svg_7" fill="#2b8c65" height="232" width="256" y="240" x="136"/>
+  <rect id="svg_8" fill="#E6E6E6" height="200" width="48" y="256" x="116"/>
+  <g id="svg_9">
+   <rect id="svg_10" fill="#CCCCCC" height="200" width="8" y="256" x="152"/>
+   <rect id="svg_11" fill="#CCCCCC" height="200" width="8" y="256" x="120"/>
+   <rect id="svg_12" fill="#CCCCCC" height="200" width="8" y="256" x="136"/>
+  </g>
+  <g id="svg_13">
+   <rect id="svg_14" fill="#E6E6E6" height="200" width="48" y="256" x="364"/>
+   <rect id="svg_15" fill="#E6E6E6" height="200" width="48" y="256" x="280"/>
+   <rect id="svg_16" fill="#E6E6E6" height="200" width="48" y="256" x="200"/>
+  </g>
+  <path id="svg_17" fill="#CCCCCC" d="m112,472l0,-12c0,-2.2 1.8,-4 4,-4l48,0c2.2,0 4,1.8 4,4l0,12l-56,0z"/>
+  <rect id="svg_18" fill="#B3B3B3" height="4" width="56" y="468" x="112"/>
+  <path id="svg_19" fill="#CCCCCC" d="m196,472l0,-12c0,-2.2 1.8,-4 4,-4l48,0c2.2,0 4,1.8 4,4l0,12l-56,0z"/>
+  <rect id="svg_20" fill="#B3B3B3" height="4" width="56" y="468" x="196"/>
+  <path id="svg_21" fill="#CCCCCC" d="m276,472l0,-12c0,-2.2 1.8,-4 4,-4l48,0c2.2,0 4,1.8 4,4l0,12l-56,0z"/>
+  <rect id="svg_22" fill="#B3B3B3" height="4" width="56" y="468" x="276"/>
+  <path id="svg_23" fill="#CCCCCC" d="m360,472l0,-12c0,-2.2 1.8,-4 4,-4l48,0c2.2,0 4,1.8 4,4l0,12l-56,0z"/>
+  <rect id="svg_24" fill="#B3B3B3" height="4" width="56" y="468" x="360"/>
+  <path id="svg_25" fill="#CCCCCC" d="m112,240l0,12c0,2.2 1.8,4 4,4l48,0c2.2,0 4,-1.8 4,-4l0,-12l-56,0z"/>
+  <rect id="svg_26" fill="#B3B3B3" height="4" width="56" y="240" x="112"/>
+  <path id="svg_27" fill="#CCCCCC" d="m196,240l0,12c0,2.2 1.8,4 4,4l48,0c2.2,0 4,-1.8 4,-4l0,-12l-56,0z"/>
+  <rect id="svg_28" fill="#B3B3B3" height="4" width="56" y="240" x="196"/>
+  <path id="svg_29" fill="#CCCCCC" d="m276,240l0,12c0,2.2 1.8,4 4,4l48,0c2.2,0 4,-1.8 4,-4l0,-12l-56,0z"/>
+  <rect id="svg_30" fill="#B3B3B3" height="4" width="56" y="240" x="276"/>
+  <path id="svg_31" fill="#CCCCCC" d="m360,240l0,12c0,2.2 1.8,4 4,4l48,0c2.2,0 4,-1.8 4,-4l0,-12l-56,0z"/>
+  <g id="svg_32">
+   <rect id="svg_33" fill="#B3B3B3" height="4" width="56" y="240" x="360"/>
+   <polygon id="svg_34" fill="#B3B3B3" points="264,104 80,224 264,224 448,224  "/>
+  </g>
+  <g id="svg_35">
+   <polygon id="svg_36" fill="#F5F5F5" points="133.824,208 264,123.1 394.176,208  "/>
+   <path id="svg_37" fill="#F5F5F5" d="m268,224c-2.2,0 -5.8,0 -8,0l-192,0c-2.2,0 -4,1.8 -4,4l0,8c0,2.2 1.8,4 4,4l192,0c2.2,0 5.8,0 8,0l192,0c2.2,0 4,-1.8 4,-4l0,-8c0,-2.2 -1.8,-4 -4,-4l-192,0z"/>
+  </g>
+  <circle id="svg_38" fill="#263740" r="8" cy="16" cx="264"/>
+  <g id="svg_39">
+   <polygon id="svg_40" fill="#F2CF61" points="344,80 296,80 296,40 344,40 328,60  "/>
+   <rect id="svg_41" fill="#F2CF61" height="40" width="48" y="24" x="264"/>
+  </g>
+  <polygon id="svg_42" fill="#E6C45C" points="312,64 296,64 296,80 "/>
+  <g id="svg_43">
+   <rect id="svg_44" fill="#CCCCCC" height="200" width="8" y="256" x="236"/>
+   <rect id="svg_45" fill="#CCCCCC" height="200" width="8" y="256" x="204"/>
+   <rect id="svg_46" fill="#CCCCCC" height="200" width="8" y="256" x="220"/>
+   <rect id="svg_47" fill="#CCCCCC" height="200" width="8" y="256" x="316"/>
+   <rect id="svg_48" fill="#CCCCCC" height="200" width="8" y="256" x="284"/>
+   <rect id="svg_49" fill="#CCCCCC" height="200" width="8" y="256" x="300"/>
+   <rect id="svg_50" fill="#CCCCCC" height="200" width="8" y="256" x="400"/>
+   <rect id="svg_51" fill="#CCCCCC" height="200" width="8" y="256" x="368"/>
+   <rect id="svg_52" fill="#CCCCCC" height="200" width="8" y="256" x="384"/>
+  </g>
+  <g id="svg_53"/>
+  <g id="svg_54"/>
+  <g id="svg_55"/>
+  <g id="svg_56"/>
+  <g id="svg_57"/>
+  <g id="svg_58"/>
+  <g id="svg_59"/>
+  <g id="svg_60"/>
+  <g id="svg_61"/>
+  <g id="svg_62"/>
+  <g id="svg_63"/>
+  <g id="svg_64"/>
+  <g id="svg_65"/>
+  <g id="svg_66"/>
+  <g id="svg_67"/>
+ </g>
+</svg>
