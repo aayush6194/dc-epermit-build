@@ -1,0 +1,17 @@
+[
+    {
+      "key": "stackedArea",
+      "label": "Stacked Area",
+      "faIcon": "fas fa-chart-area"
+    },
+    {
+      "key": "multiLine",
+      "label": "Multi Line",
+      "faIcon": "fas fa-chart-line"
+    },
+     {
+      "key": "stackedBar",
+      "label": "Stacked Bar",
+      "faIcon": "fas fa-chart-bar"
+    }
+]
