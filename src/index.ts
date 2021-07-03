@@ -49,6 +49,19 @@ app.post('/api/epermit/:id', async (req, res, next) => {
 
 app.delete('/api/epermit/all', async (req, res, next) => {
   try {
+    await repo.removeEpermit();
+    res.status(200).json({ success: true });
+
+  } catch (e) {
+    res.json({ success: false, message: e.message || e});
+  }
+
+});
+
+
+
+app.delete('/api/epermit/reset', async (req, res, next) => {
+  try {
     await repo.reset();
     res.status(200).json({ success: true });
 

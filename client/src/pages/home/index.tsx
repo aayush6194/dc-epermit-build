@@ -5,6 +5,7 @@ import { Link, NavLink, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Client } from "../../store/reducer/clients";
 import { Permit, RootPermit } from "../../store/reducer/permit";
+import api from "../../api";
 
 export const toRoute = (str: string) => str.toLowerCase().replace(/\s+/g, "-");
 const Home = () => {
@@ -20,12 +21,13 @@ const Home = () => {
           width="100%"
           padding=".5em 2em"
           color={"red"}
-          onClick={() => {
-            localStorage.clear();
+          onClick={async() => {
+            alert()
+            await api.resetEpermit()
             history.go(0);
           }}
         >
-          <i className="fas fa-sync" /> <span>&nbsp; Refresh</span>
+          <i className="fas fa-sync" /> <span>&nbsp;Refresh</span>
         </Text>
 
         <Grid padding="0" placeItems={"stretch"} gridGap="0">

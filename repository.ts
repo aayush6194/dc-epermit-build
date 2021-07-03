@@ -29,8 +29,8 @@ export interface Permit {
   liscensePlate: string,
   phone: string,
   zone: string,
-  type: 'Residential' | 'Visitor',
-  stars: string;
+  type: 'Residential' | 'Visitor' | string,
+  starts: string;
   ends: string;
   employer: number;
 }
@@ -55,9 +55,43 @@ export const postEpermit = async (epermit: Permit) => epermitCollection.insertOn
   visitor: [],
 });
 
-export const reset = () => {
-  return epermitCollection.remove({});
+const permit = {
+  "_id": new ObjectId(),
+  "firstName": "Hooman",
+  "lastName": "Bolandi",
+  "email": "hooman.bolandi@gmail.com",
+  "liscensePlate": "333DEF",
+  "phone": "412-456-5800",
+  "zone": "DIA",
+  "type": "Residential",
+  "starts": "Thu, Jun 01, 2021 @ 09:02 Pm",
+  "ends": "Sat, Jun 01, 2023 @ 09:02 Pm",
+  "employer": 0,
+  residential: [],
+  visitor: [
+
+    {
+      "_id": new ObjectId(),
+      "firstName": "Emma",
+      "lastName": "Doe",
+      "email": "Emma.Doe@gmail.com",
+      "liscensePlate": "333DEF",
+      "phone": "412-456-5800",
+      "zone": "DIA",
+      "type": "Visitor",
+      "starts": "Thu, Jun 01, 2021 @ 09:02 Pm",
+      "ends": "Sat, Jun 01, 2023 @ 09:02 Pm",
+       "employer": 0
+    }
+  ]
 }
+export const reset = async () => {
+  await epermitCollection.remove({});
+  await epermitCollection.insertOne(permit)
+}
+
+export const removeEpermit = () => epermitCollection.remove({});
+
 export const addPermit = async (permit: Permit, _id: ObjectId) => {
   return epermitCollection.findOne({ _id })
     .then(result => {

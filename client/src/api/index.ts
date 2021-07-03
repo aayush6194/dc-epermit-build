@@ -1,5 +1,5 @@
 
-import { post, authGet, authPost, customPost, authUpload, get } from './request';
+import { post, authGet, authPost, customPost, authUpload, get, authDelete , deleteReq} from './request';
 import { API, API2, googleAPIKey  } from '../config'
 import { EditAnnouncement, AddAnnouncement } from '../model/domain/announcements';
 import { Garage, UpdateGarageModel, GarageOccupancyTable, AddGarageModel } from '../model/domain/garage';
@@ -100,6 +100,7 @@ const getCapabilityDescriptors = ()=> authGet(route(`/v1/enterprises/capabilityD
  const getAllPermits = () => get(route2("/epermit/all"));
  const addEpermit = (epermit: Partial<RootPermit>) => post(route2("/epermit"), { epermit } , false);
  
+ const resetEpermit = () => deleteReq(route2("/epermit/reset"));
  const addResidence = (epermit: Partial<RootPermit>, eId: string) => post(route2("/epermit/"+ eId), { epermit } , false);
 export default {
   getGarages, getTimeSeries, addGarage, editGarage,
@@ -115,5 +116,5 @@ export default {
   removeRole, editRole, assignRole, addRole, listMyScoreCardDescriptors, getScoreCardValues, listScoreCardDescriptors,
   sendEmail,
   getPlaces, sendTowEmail, sendTowEmail2,
-  getAllPermits, addEpermit, addResidence
+  getAllPermits, addEpermit, addResidence, resetEpermit
  }

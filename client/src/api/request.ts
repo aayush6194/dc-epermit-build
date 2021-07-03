@@ -42,6 +42,11 @@ function authDelete(url: string, params : string, useDelay = true){
   .then(useDelay? delayedResponse: response);
 }
 
+function deleteReq(url: string, params? : string, useDelay = true){
+  return fetch(`${url}/${params || ''}`, { method: 'DELETE', headers: header()} )
+  .then(useDelay? delayedResponse: response);
+}
+
 function customPost(url: string, header: any, body: object, useDelay = true) {
   return fetch(url, { method: 'POST', headers: {"Content-Type": "application/json", ...header} , body: JSON.stringify(body) })
   .then(useDelay? delayedResponse: response);
@@ -73,4 +78,4 @@ function authUpload(url : string, file : any) {
 }
 
 
-export { get, authGet, post, authPost, authPut, customPost, authCustom, authGetParams, authGetQuery, authUpload, authDelete };
+export { get, authGet, post, authPost, authPut, customPost, authCustom, authGetParams, authGetQuery, authUpload, authDelete , deleteReq};
