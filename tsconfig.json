@@ -1,24 +1,15 @@
-{"compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "commonjs",
+    "strict": true,
+    "strictNullChecks": true,
+
+    /*type inference and ctrl clicking on import strings would not work unless I turn this on*/
+    //"allowJs": true
+
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
+    "inlineSourceMap": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["**/*.ts"]
 }

@@ -1,0 +1,83 @@
+{
+  "name": "los-gatos-epermit",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@sentry/browser": "^5.17.0",
+    "@types/google-map-react": "^2.1.0",
+    "@types/node": "^12.12.47",
+    "@types/react": "^16.9.36",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.12",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.0",
+    "@types/yup": "^0.29.3",
+    "@vx/axis": "0.0.197",
+    "@vx/curve": "latest",
+    "@vx/event": "latest",
+    "@vx/gradient": "latest",
+    "@vx/grid": "latest",
+    "@vx/legend": "0.0.197",
+    "@vx/mock-data": "latest",
+    "@vx/responsive": "latest",
+    "@vx/scale": "latest",
+    "@vx/shape": "latest",
+    "@vx/tooltip": "latest",
+    "antd": "^4.3.4",
+    "formik": "^2.1.4",
+    "google-map-react": "^2.1.9",
+    "google-maps-react": "^2.0.6",
+    "moment-timezone": "^0.5.31",
+    "platyplex_ui": "^1.7.0",
+    "react": "^16.8.6",
+    "react-countup": "^4.3.3",
+    "react-dom": "^16.8.6",
+    "react-google-map": "^3.1.1",
+    "react-redux": "^7.2.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.1",
+    "react-verification-code-input": "^1.2.9",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.1.1",
+    "typescript": "^3.7.5",
+    "yup": "^0.29.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public",
+    "update-ui": "npm uninstall playtpus_ui && npm install platyplex_ui@latest --save"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/react": "^5.3.19",
+    "@types/googlemaps": "^3.40.0",
+    "@types/jest": "^24.9.0",
+    "@types/react-facebook-login": "^4.1.2",
+    "@types/react-test-renderer": "^16.9.3"
+  }
+}
