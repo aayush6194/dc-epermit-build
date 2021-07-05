@@ -22,7 +22,6 @@ const Home = () => {
           padding=".5em 2em"
           color={"red"}
           onClick={async() => {
-            alert()
             await api.resetEpermit()
             history.go(0);
           }}
