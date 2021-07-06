@@ -320,7 +320,7 @@ export class MapContainer extends React.Component<any, any> {
                   }}
                 >
                   
-                  <h2>Location: {"  7925 Central Avenue Capitol Heights, MD 20743"}</h2>
+                  <h2>Location: {"7925 Central Avenue Capitol Heights, MD 20743"}</h2>
                   
                 </div>
               </InfoWindowEx>

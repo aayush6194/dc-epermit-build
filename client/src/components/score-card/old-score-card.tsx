@@ -26,13 +26,13 @@ export const ScoreCard = ({
   return (
     <Grid
       className={"noselect span-" + span}
-      style={{ ...borderStyle, minHeight: "10em" }}
+      style={{ ...borderStyle, minHeight: "10em", padding: '.25em' }}
       placeSelf="stretch"
-      gridGap=".5em"
+      gridGap=".25em"
       customRows="auto 1fr"
     >
       <Header
-        size={3.75}
+        size={3.85}
         color={color}
         placeSelf="start stretch"
         style={{ lineHeight: "1.1em", height: "2em" }}

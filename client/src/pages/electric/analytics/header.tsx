@@ -40,7 +40,8 @@ const Header = () => {
             cols='5'
             style={{ gridColumn: '1/-1', marginBottom: '1em' }}
             width='100%'
-            padding='1.5em 1.5em 0 1.5em'
+            gridGap='.25em'
+            padding='1em 1em 0 1em'
         >
             <div
                 id='header'
@@ -138,8 +139,8 @@ const Header = () => {
                                         <span className='txt-overflow'style={{color: 'white'}}>{electricPermits[i].firstName + " "+ electricPermits[i].lastName}</span>
                                         <ScoreCard.PercentBar
                                             status
-                                            percent={(occupancy * 100)/2}
-                                            text={`${(occupancy * 100)/2}%`}
+                                            percent={datas[i]}
+                                            text={`${datas[i]}%`}
                                         />
                                    
                                     </Grid>
@@ -151,5 +152,7 @@ const Header = () => {
             </ScoreCard>
         </Grid>);
 }
+
+const datas = [100, 100, 92]
 
 export default Header;
