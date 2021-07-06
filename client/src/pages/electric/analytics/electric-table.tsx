@@ -24,7 +24,7 @@ export const electricPermits = [{
   lastName: 'Vu',
   phone: '421-454-9022',
   liscensePlate: '332DER',
-  email: 'lisa.vu@gmail.com',
+  email: 'lisa.vu@co.pg.md.us',
   starts: moment().add('m', -15).add('h', -5).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 100
 },
@@ -33,9 +33,9 @@ export const electricPermits = [{
   vehicleId: '642',
   firstName: 'Emma',
   lastName: 'Doe',
-  phone: '344-137-700',
+  phone: '344-137-7100',
   liscensePlate: '13DEF5',
-  email: 'emma@yahoo.com',
+  email: 'emma@co.pg.md.us',
   starts: moment().add('m', -22).add('h', -4).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 91
 },
@@ -46,7 +46,7 @@ export const electricPermits = [{
   lastName: 'Chiala',
   phone: '412-671-1235',
   liscensePlate: '4EAF32',
-  email: 'harry@hotmail.com',
+  email: 'harry@co.pg.md.us',
   starts: moment().add('m', -48).add('h', -4).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 67
 },
@@ -57,7 +57,7 @@ export const electricPermits = [{
   lastName: 'Master',
   phone: '412-290-7845',
   liscensePlate: 'FRT789',
-  email: 'johnmc@gmail.com',
+  email: 'johnmc@co.pg.md.us',
   starts: moment().add('m', -43).add('h', -2).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 52
 },
@@ -68,7 +68,7 @@ export const electricPermits = [{
   lastName: 'Roman',
   phone: '412-627-1670',
   liscensePlate: '52VBQE',
-  email: 'roman@gmail.com',
+  email: 'roman@co.pg.md.us',
   starts: moment().add('m', -21).add('h', -2).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 45
 },
@@ -79,7 +79,7 @@ export const electricPermits = [{
   lastName: 'Owens',
   phone: '412-520-2685',
   liscensePlate: 'D2IO9',
-  email: 'sammy@yahoo.com',
+  email: 'sammy@co.pg.md.us',
   starts: moment().add('m', -11).add('h', -2).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 42
 }
@@ -122,7 +122,7 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
     title: () => (
       <Grid placeItems="center start">
         Vehicle ID #
-        <Select style={{ width: 65 }} defaultValue="All">
+        <Select style={{ width: 45 }} defaultValue="All">
           <Select.Option value={"Residential"}>Residential</Select.Option>
           <Select.Option value={"Visitor"}>Visitor</Select.Option>
         </Select>
@@ -174,7 +174,7 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
     title: () => (
       <Grid placeItems="center start">
         Phone Number
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 80 }} />
+        <Input prefix={<i className="fa fa-search" />} style={{ width: 100 }} />
       </Grid>
     ),
     render: (i: any) => i.phone || "623-143-9124",
@@ -193,7 +193,7 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
     title: () => (
       <Grid placeItems="center start">
         License Plate #
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
+        <Input prefix={<i className="fa fa-search" />} style={{ width: 45 }} />
       </Grid>
     ),
     dataIndex: "liscensePlate",
