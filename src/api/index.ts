@@ -1,3 +1,4 @@
+import { getEmailTemplate } from '../utils/email';
 import {  authPost } from './utils/request';
 
 
@@ -13,7 +14,23 @@ interface Body {
   space: number;
 }
 
+export interface UserInfo {
+  firstName: string;
+  lastName: string;
+  department: string;
+  starts: string;
+  ends: string;
+  licensePlate: string;
+}
+
 
 const sendEmail = (body: Body) => authPost('https://test.findparkstash.com/api/v1/utils/emailSutterHealth', body);
 
-export default { sendEmail }
+const customEmail = (to: String, info: UserInfo) => authPost('https://test.findparkstash.com/api/v1/testOnly/email', {
+  "from" :"ParkStash <important@findparkstash.com>",
+   to,
+  "subject": "ParkStash E-Permit Details",
+  "html": getEmailTemplate(info)
+});
+
+export default { sendEmail, customEmail }

@@ -18,7 +18,7 @@ export enum Zone {
 export const defaultClients: Client[] = [
   {
     id: "1",
-    name: "Apple Store",
+    name: "VMTH",
     open: true,
     parkingSpace: 65,
     overbooking: true,
@@ -36,7 +36,7 @@ export const defaultClients: Client[] = [
   },
   {
     id: "2",
-    name: "Wells Fargo",
+    name: "UCDH Clinic",
     open: false,
     parkingSpace: 120,
     overbooking: true,
@@ -55,7 +55,62 @@ export const defaultClients: Client[] = [
 
   {
     id: "3",
-    name: "Pizza My Heart",
+    name: "CNL",
+    open: false,
+    parkingSpace: 100,
+    overbooking: true,
+    communication: true,
+  
+    parkingLot: [ParkingLot.Lot1],
+    zone: [Zone.R1],
+
+    employee: 90,
+    handicap: 10,
+    
+    employeeFee : 45,
+    handicapFee: 45,
+    residenceFee: 45
+  },
+
+  {
+    id: "4",
+    name: "Nutrition",
+    open: false,
+    parkingSpace: 100,
+    overbooking: true,
+    communication: true,
+  
+    parkingLot: [ParkingLot.Lot1],
+    zone: [Zone.R1],
+
+    employee: 90,
+    handicap: 10,
+    
+    employeeFee : 45,
+    handicapFee: 45,
+    residenceFee: 45
+  },
+  {
+    id: "5",
+    name: "Employee Health",
+    open: false,
+    parkingSpace: 100,
+    overbooking: true,
+    communication: true,
+  
+    parkingLot: [ParkingLot.Lot1],
+    zone: [Zone.R1],
+
+    employee: 90,
+    handicap: 10,
+    
+    employeeFee : 45,
+    handicapFee: 45,
+    residenceFee: 45
+  },
+  {
+    id: "6",
+    name: "SDC",
     open: false,
     parkingSpace: 100,
     overbooking: true,

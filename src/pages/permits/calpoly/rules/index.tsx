@@ -131,11 +131,11 @@ const ClientForm = ({
     <form onChange={handleChange}>
       <Grid customCols="auto auto auto" placeSelf="stretch" placeItems="start">
         <Grid customCols="auto auto">
-          Employer Name
+          Department Name
           <Input name={"name"} onChange={handleChange} value={values.name} />
         </Grid>
 
-        <div>
+        {/* <div>
           Zone &nbsp;
           <Select
            mode="multiple"
@@ -161,7 +161,7 @@ const ClientForm = ({
               <Select.Option value={v}>{v}</Select.Option>
             ))}
           </Select>
-        </div>
+        </div> */}
 
         
         <div>
@@ -202,7 +202,7 @@ const ClientForm = ({
         <div>
           Navigation Allowed &nbsp; <SwitchAtnd defaultChecked />
         </div>
-
+{/* 
         <div>
           Communication with employee allowed &nbsp;{" "}
           <SwitchAtnd
@@ -233,7 +233,7 @@ const ClientForm = ({
             value={values.residenceFee}
             onChange={(e) => setFieldValue("residenceFee", e)}
           />
-        </div>
+        </div> */}
 
         <Grid customCols="auto auto">
           {cancelAdd ? (

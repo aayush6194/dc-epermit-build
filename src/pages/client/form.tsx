@@ -108,6 +108,7 @@ type Values =
   | "email"
   | "starts"
   | "ends"
+  | "employer"
   | "phone";
 
 const vehicleFields = [
@@ -153,7 +154,8 @@ const vehicleFields = [
 const FormComp = ({ submit, admin }: any) => {
   const dispatch = useDispatch();
   const { clients } = useSelector((state: any) => state.clients);
-  let { id } = useParams();
+  let { id } = useParams<any>();
+  admin = id === undefined;
   const {
     handleSubmit,
     handleChange,
@@ -164,16 +166,15 @@ const FormComp = ({ submit, admin }: any) => {
     initialValues: defaultValue,
     async onSubmit(values) {
       dispatch(addPermit(values));
-      api.sendEmail({
+      api.customEmail(
+        values.email,
+        {
         firstName: values.firstName,
         lastName: values.lastName,
-        email:  values.email,
         licensePlate: values.liscensePlate,
-        phone: values.phone,
-        vaccine: clients[0]?.vaccine,
-        date: moment(values.starts).toISOString(),
-        location: clients[0]?.name, 
-        space:  1,
+        department: clients[values.employer]?.name || 'VMTH',
+        starts: moment(values.starts).format('ddd, MMM DD, YYYY @ hh:mm A'),
+        ends: moment(values.ends).format('ddd, MMM DD, YYYY @ hh:mm A'), 
       })
       .catch((e)=>console.log(e))
       submit({ ...values, done: true });
@@ -183,7 +184,7 @@ const FormComp = ({ submit, admin }: any) => {
   useEffect(()=>{
     if(id){
       const index = Number(id) - 1;
-      setFieldValue('employer', clients[index]?.name || 'Apple Store')
+      setFieldValue('employer', index || 0)
     }
   }, [])
 
@@ -202,7 +203,8 @@ const FormComp = ({ submit, admin }: any) => {
               Hi there!
             </Header>
             <Text textAlign="left">
-              Welcome to Los Gatos E-permit reservation system.
+            Welcome to the UC Davis Medical Center parking E-permit
+              reservation system.
             </Text>
             <Text textAlign="left">
               Please enter your information below to generate E-Permit
@@ -262,71 +264,25 @@ const FormComp = ({ submit, admin }: any) => {
             )
           )}
           
-          <div style={{ paddingTop: ".5em" }}>
-            <Text textAlign="left" color={primaryColor} bold>
-             Permit Type
-            </Text>
-
-            <Select 
-            style={{width: '100%'}}  
-            value={values.type}
-            onChange={(e) => setFieldValue("type", e)}
-          >
-            {Object.keys(PermitType).map((v) => (
-              <Select.Option value={v}>{v}</Select.Option>
-            ))}
-          </Select>
-          </div>
-
-          <div style={{ paddingTop: ".5em" }}>
-            <Text textAlign="left" color={primaryColor} bold>
-              Name of Employer
-            </Text>
-
-            <Select 
-            style={{width: '100%'}}  
-            value={values.employer}
-            disabled={id !== undefined}
-            onChange={(e) => setFieldValue("employer", e)}
-          >
-            {clients.map((v: Client, i: number) => (
-              <Select.Option value={i}>{v.name}</Select.Option>
-            ))}
-          </Select>
-          </div>
-
-          <div style={{ paddingTop: ".5em" }}>
-            <Text textAlign="left" color={primaryColor} bold>
-              Olive Parking Zone
-            </Text>
-
-            <Select 
-            style={{width: '100%'}}  
-            value={values.zone}
-            onChange={(e) => setFieldValue("zone", e)}
-          >
-            {Object.keys(Zone).map((v) => (
-              <Select.Option value={v}>{v}</Select.Option>
-            ))}
-          </Select>
-          </div>
 
 
-          <div style={{ paddingTop: ".5em" }}>
-            <Text textAlign="left" color={primaryColor} bold>
-              Parking Lot
-            </Text>
+          <div style={{ paddingTop: ".5em" }} key={id}>
+              
+                  <Text textAlign="left" color={primaryColor} bold>
+                   Department
+                  </Text>
+                
+                  <Select
+                    style={{ minWidth: "20vw", background: "transparent" }}
+                    disabled={!admin}
+                    value={values.employer}
+                    onChange={(e: number)=>setFieldValue('employer', e)}
+                  >
+                    {clients.map((e: Client,i: number)=><Select.Option value={i}>{e.name}</Select.Option>)}
+                  </Select>
+              </div>
 
-            <Select
-            style={{width: '100%'}}      
-            value={values.parkingLot}
-            onChange={(e) => setFieldValue("parkingLot", e)}
-            >
-            {Object.keys(ParkingLot).map((v) => (
-              <Select.Option value={v}>{v}</Select.Option>
-            ))}
-            </Select>
-          </div>
+
           <div style={{gridColumn: 'span 2', display: 'grid'}}>
           <Button.Normal
             style={{

@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 import { Avatar, Grid } from "platyplex_ui";
 import styled, { keyframes } from "styled-components";
 import {  mobileWidth, primaryColor, primaryTxtColor } from "../../config";
-import avatar from '../../assets/logo.png';
+import avatar from '../../assets/UCDavisHealth-color.png';
 
 const Sidebar = ({ avatarImg }: { avatarImg?: string }) => {
   const location = useLocation().pathname;
@@ -15,7 +15,7 @@ const Sidebar = ({ avatarImg }: { avatarImg?: string }) => {
 
   return (
     <Sideba
-     // avatar={avatar}
+     avatar={avatar}
       avatarStyle={{
         width: '100%',
         height: "auto",

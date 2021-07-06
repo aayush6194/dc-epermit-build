@@ -19,7 +19,7 @@ enum HistoryState {
 
 const History = ({ client }: { client?: Client }) => {
   const admin = !client;
-  let { id } = useParams();
+  let { id } = useParams<any>();
   const [state, setter] = useState({
     type: HistoryState.ACTIVE,
     checked: false,
@@ -179,9 +179,9 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
   {
     title: () => (
       <Grid placeItems="center start">
-      Employer
+     Department
         <Select style={{ width: 65 }} defaultValue="All">
-          <Select.Option value={"Moderna"}>Apple Store</Select.Option>
+          <Select.Option value={"Moderna"}>VMTH</Select.Option>
         </Select>
       </Grid>
     ),
@@ -241,15 +241,7 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
     render: (i: any) => i.phone || "623-143-9124",
   },
 
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Olive Parking Zone
-        <Select style={{ width: 60 }} defaultValue="All" />
-      </Grid>
-    ),
-    dataIndex: "zone",
-  },
+
   {
     title: () => (
       <Grid placeItems="center start">
@@ -278,16 +270,6 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
     dataIndex: "ends",
   },
 
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Parking Lot
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 50 }} />
-      </Grid>
-    ),
-    dataIndex: "parkingLot",
-  },
 
 
   {

@@ -51,7 +51,7 @@ const Analytics = () => {
               </div>
 
               <div style={{ borderRight: "2px solid " + disabledTxtColor }}>
-                <Text>Total # of Employee Permits</Text>
+                <Text>Total # of Department Permits</Text>
                 <Text size="2.25em" color={primaryColor} bold>
                   {employee}
                 </Text>
@@ -65,12 +65,12 @@ const Analytics = () => {
               </div>
             </Grid>
 
-            <Text>
+            {/* <Text>
               Total Monthly Fee:{" "}
               <span style={{ color: primaryColor }} className="bold">
                 ${employeeFee * employee + handicap * handicapFee}
               </span>
-            </Text>
+            </Text> */}
           </Card>
         )
       )}

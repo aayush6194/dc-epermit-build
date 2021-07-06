@@ -27,16 +27,16 @@ const Home = () => {
           </Text>
         <Grid padding="0" placeItems={"stretch"} gridGap="0">
           <NavLink to={"/client"}>
-            <span>Visitor to the Town</span>
+            <span>Client</span>
           </NavLink>
           <br/>
           <NavLink to={"/e-permits"}>
-            E-Permit (Town of Los Gatos, Parking Manager)
+            E-Permit (UC Davis, Parking Manager)
           </NavLink>
           <br/>
           {clients.map((c: Client) => (
             <NavLink key={c.id} to={`/e-permits/${c.id}`}>
-              E-Permit (Town of Los Gatos, {c.name})
+              E-Permit (UC Davis, Employee - {c.name})
             </NavLink>
           ))}
 
