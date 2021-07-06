@@ -153,6 +153,6 @@ const Header = () => {
         </Grid>);
 }
 
-const datas = [100, 100, 92]
+const datas = [65, 43, 41]
 
 export default Header;

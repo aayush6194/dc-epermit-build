@@ -26,7 +26,7 @@ export const electricPermits = [{
   liscensePlate: '332DER',
   email: 'lisa.vu@gmail.com',
   starts: moment().add('m', -15).add('h', -5).format("ddd, MMM DD, YYYY @ hh:mm A"),
-  status: 91
+  status: 100
 },
 {
   id: random(5),
@@ -37,7 +37,7 @@ export const electricPermits = [{
   liscensePlate: '13DEF5',
   email: 'emma@yahoo.com',
   starts: moment().add('m', -22).add('h', -4).format("ddd, MMM DD, YYYY @ hh:mm A"),
-  status: 73
+  status: 91
 },
 {
   id: random(5),
