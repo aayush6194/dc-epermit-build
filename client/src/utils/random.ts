@@ -1,4 +1,4 @@
-export const random  = (length : number) =>{
+export const random  = (length : number, number = false) =>{
     let max : number = 123; //ascii for 'z'
     let min : number = 97; //ascii for 'a'
     let temp : string = '';

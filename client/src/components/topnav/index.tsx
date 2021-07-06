@@ -12,7 +12,7 @@ const TopNavBar = () => {
   return (
     <MiniNav>
       <Text className="capitalize bold txt-md txt-left" style={{ minWidth: "100px", width: "100%" }}>
-        {location === "/" || location === "/overview" ? "Overview" : location.replace("/", "")}
+        {location === "/" || location === "/overview" ? "Overview" : location.replace("/", "").replace(/-/g, " ")}
       </Text>
 
       <Popover

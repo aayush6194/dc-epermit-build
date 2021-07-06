@@ -32,10 +32,10 @@ export const ScoreCard = ({
       customRows="auto 1fr"
     >
       <Header
-        size={3.5}
+        size={3.75}
         color={color}
         placeSelf="start stretch"
-        style={{ lineHeight: ".8em", height: "1.5em" }}
+        style={{ lineHeight: "1.1em", height: "2em" }}
       >
         {title} &nbsp;
         {faIcon && (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import ErrorBoundary from "antd/lib/alert/ErrorBoundary";
 import { Loader } from "platyplex_ui";
-import { Home, Client, PermitsCalpoly, Map, Events } from "./pages";
+import { Home, Client, PermitsCalpoly, Map, Events, Electric } from "./pages";
 import logo from "./assets/parkstash_logo.png";
 import { useSelector } from "react-redux";
 import { Client as ClientType } from "./store/reducer/clients";
@@ -117,6 +117,7 @@ function App() {
           <Route exact path="/client" render={() => <Client />} />
           <Route exact path="/map" render={() => <Map />} />
           <Route exact path="/legal" render={() => <Legal />} />
+          <Route exact path="/enforment-electric-vehicles-dashboard" render={() => <Electric />} />
           <Route exact path="/help" render={() => <Help />} />
           <Route path="/" render={() => <Home />} />
         </Switch>

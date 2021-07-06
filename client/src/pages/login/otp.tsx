@@ -6,6 +6,7 @@ const Otp = ({ authenticate }: { authenticate: () => void }) => {
   const [otp, setOtp] = useState("");
   useEffect(() => {
     if (otp === "6194") {
+      localStorage.setItem('AUTH', 'true')
       authenticate();
     } else if (otp.length === 4) {
       Notification.error({ title: "Error", message: "Wrong Code!" });

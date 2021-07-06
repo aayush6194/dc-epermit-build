@@ -12,7 +12,7 @@ const Events = () => {
   const switches = (
     <Grid margin=".75em" cols='2' gridGap='.25em'>
       <Link to="/citations/1">
-        <Text color="white" bold size='1.25em' style={{textDecoration: 'underline'}}>
+        <Text color="white" bold size='1.25em' style={{textDecoration:  'underline'}}>
          Analytics
         </Text>
       </Link>

@@ -37,6 +37,14 @@ const routes = [
   },
   {
     "to":[
+       "/enforment-electric-vehicles-dashboard"
+    ],
+    "name":"electric",
+    "displayName":"Electric",
+    "icon":"fas fa-bolt"
+ },
+  {
+    "to":[
        "/legal"
     ],
     "name":"legal",
