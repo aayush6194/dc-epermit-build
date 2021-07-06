@@ -35,7 +35,7 @@ export const electricPermits = [{
   lastName: 'Doe',
   phone: '344-137-7100',
   liscensePlate: '13DEF5',
-  email: 'emma@co.pg.md.us',
+  email: 'emma.doe@co.pg.md.us',
   starts: moment().add('m', -22).add('h', -4).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 91
 },
@@ -46,7 +46,7 @@ export const electricPermits = [{
   lastName: 'Chiala',
   phone: '412-671-1235',
   liscensePlate: '4EAF32',
-  email: 'harry@co.pg.md.us',
+  email: 'harry.chiala@co.pg.md.us',
   starts: moment().add('m', -48).add('h', -4).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 67
 },
@@ -57,7 +57,7 @@ export const electricPermits = [{
   lastName: 'Master',
   phone: '412-290-7845',
   liscensePlate: 'FRT789',
-  email: 'johnmc@co.pg.md.us',
+  email: 'john.master@co.pg.md.us',
   starts: moment().add('m', -43).add('h', -2).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 52
 },
@@ -68,7 +68,7 @@ export const electricPermits = [{
   lastName: 'Roman',
   phone: '412-627-1670',
   liscensePlate: '52VBQE',
-  email: 'roman@co.pg.md.us',
+  email: 'nick.roman@co.pg.md.us',
   starts: moment().add('m', -21).add('h', -2).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 45
 },
@@ -79,7 +79,7 @@ export const electricPermits = [{
   lastName: 'Owens',
   phone: '412-520-2685',
   liscensePlate: 'D2IO9',
-  email: 'sammy@co.pg.md.us',
+  email: 'sammy.owens@co.pg.md.us',
   starts: moment().add('m', -11).add('h', -2).format("ddd, MMM DD, YYYY @ hh:mm A"),
   status: 42
 }
