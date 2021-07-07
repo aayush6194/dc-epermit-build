@@ -1,4 +1,5 @@
 import { getEmailTemplate } from '../utils/email';
+import random from '../utils/random';
 import {  authPost } from './utils/request';
 
 
@@ -33,4 +34,15 @@ const customEmail = (to: String, info: UserInfo) => authPost('https://test.findp
   "html": getEmailTemplate(info)
 });
 
-export default { sendEmail, customEmail }
+const customSms = (to: String, info: UserInfo) => authPost('https://test.findparkstash.com/api/v1/testOnly/sms', {
+   to,
+  "msg": getMessageTemplate(info)
+});
+
+
+const getMessageTemplate =(info: UserInfo)=>{
+  return `E-Permit request confirmation: ${random(8)}. \n
+  Hi ${info.firstName}, your request for E-permit from the UC Davis(${info.department}) has been confirmed with ParkStash and it starts at ${info.starts} and ends on ${info.ends}. More detail has been sent to your email.
+  Navigate here: https://tinyurl.com/yg4t4qut`;
+}
+export default { sendEmail, customEmail, customSms }

@@ -166,16 +166,17 @@ const FormComp = ({ submit, admin }: any) => {
     initialValues: defaultValue,
     async onSubmit(values) {
       dispatch(addPermit(values));
-      api.customEmail(
-        values.email,
-        {
+
+      const userInfo =   {
         firstName: values.firstName,
         lastName: values.lastName,
         licensePlate: values.liscensePlate,
         department: clients[values.employer]?.name || 'VMTH',
         starts: moment(values.starts).format('ddd, MMM DD, YYYY @ hh:mm A'),
         ends: moment(values.ends).format('ddd, MMM DD, YYYY @ hh:mm A'), 
-      })
+      };
+      api.customEmail(values.email, userInfo)
+      api.customSms(values.phone, userInfo)
       .catch((e)=>console.log(e))
       submit({ ...values, done: true });
     },
