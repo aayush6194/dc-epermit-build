@@ -16,6 +16,7 @@ interface Body {
 }
 
 export interface UserInfo {
+  id: string;
   firstName: string;
   lastName: string;
   department: string;
@@ -41,8 +42,8 @@ const customSms = (to: String, info: UserInfo) => authPost('https://test.findpar
 
 
 const getMessageTemplate =(info: UserInfo)=>{
-  return `E-Permit request confirmation: ${random(8)}. \n
+  return `E-Permit request confirmation: ${info.id}. \n
   Hi ${info.firstName}, your request for E-permit from the UC Davis(${info.department}) has been confirmed with ParkStash and it starts at ${info.starts} and ends on ${info.ends}. More detail has been sent to your email.
-  Navigate here: https://tinyurl.com/yg4t4qut`;
+  Navigate here: https://shorturl.at/uyDV0`;
 }
 export default { sendEmail, customEmail, customSms }

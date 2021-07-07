@@ -11,6 +11,7 @@ import { ParkingLot, Zone } from "../../store/actions/clients";
 import { PermitType } from "../../store/reducer/permit";
 import { Client } from "../../store/reducer/clients";
 import { useParams } from "react-router";
+import random from "../../utils/random";
 
 const defaultValue = {
   firstName: "",
@@ -168,6 +169,7 @@ const FormComp = ({ submit, admin }: any) => {
       dispatch(addPermit(values));
 
       const userInfo =   {
+        id: random(5),
         firstName: values.firstName,
         lastName: values.lastName,
         licensePlate: values.liscensePlate,
