@@ -110,9 +110,9 @@ const Header = () => {
             </ScoreCard>
 
             <ScoreCard title='Top Maintenance Issues' faIcon='fas fa-money-check-alt' hoverLabel='Revenue' borderRight>
-            <Text color='white' size={'1.1em'}>Electronics ({enterpriseEvent.street ||  272})</Text>
-             <Text color='white' size={'1.1em'}>Breaks ({enterpriseEvent.grades ||8})</Text>
-             <Text color='white' size={'1.1em'}>Transmission ({enterpriseEvent.sidewalk || 7})</Text>
+            <Text color='white' size={'1.1em'}>Battery Cable ({enterpriseEvent.street ||  272})</Text>
+             <Text color='white' size={'1.1em'}>Brake ({enterpriseEvent.grades ||8})</Text>
+             <Text color='white' size={'1.1em'}>Alternator ({enterpriseEvent.sidewalk || 7})</Text>
       
             </ScoreCard>
             <ScoreCard title='Charge Status @ Drop off' faIcon='fa fa-car' hoverLabel='Occupancy Count' span={1}>

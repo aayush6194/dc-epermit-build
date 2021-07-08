@@ -22,6 +22,7 @@ export const electricPermits = [{
   vehicleId: '231',
   firstName: 'Lisa',
   lastName: 'Vu',
+  dailyMilage: 142,
   phone: '421-454-9022',
   liscensePlate: '332DER',
   email: 'lisa.vu@co.pg.md.us',
@@ -33,6 +34,7 @@ export const electricPermits = [{
   vehicleId: '642',
   firstName: 'Emma',
   lastName: 'Doe',
+  dailyMilage: 127,
   phone: '344-137-7100',
   liscensePlate: '13DEF5',
   email: 'emma.doe@co.pg.md.us',
@@ -44,6 +46,7 @@ export const electricPermits = [{
   vehicleId: '738',
   firstName: 'Harry',
   lastName: 'Chiala',
+  dailyMilage: 89,
   phone: '412-671-1235',
   liscensePlate: '4EAF32',
   email: 'harry.chiala@co.pg.md.us',
@@ -55,6 +58,7 @@ export const electricPermits = [{
   vehicleId: '765',
   firstName: 'John',
   lastName: 'Master',
+  dailyMilage: 74,
   phone: '412-290-7845',
   liscensePlate: 'FRT789',
   email: 'john.master@co.pg.md.us',
@@ -66,6 +70,7 @@ export const electricPermits = [{
   vehicleId: '788',
   firstName: 'Nick',
   lastName: 'Roman',
+  dailyMilage: 70,
   phone: '412-627-1670',
   liscensePlate: '52VBQE',
   email: 'nick.roman@co.pg.md.us',
@@ -77,6 +82,7 @@ export const electricPermits = [{
   vehicleId: '788',
   firstName: 'Sammy',
   lastName: 'Owens',
+  dailyMilage: 68,
   phone: '412-520-2685',
   liscensePlate: 'D2IO9',
   email: 'sammy.owens@co.pg.md.us',
@@ -164,7 +170,7 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
     title: () => (
       <Grid placeItems="center start">
         Email
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 80 }} />
+        <Input prefix={<i className="fa fa-search" />} style={{ width: 70 }} />
       </Grid>
     ),
     dataIndex: "email",
@@ -197,6 +203,15 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
       </Grid>
     ),
     dataIndex: "liscensePlate",
+  },
+  {
+    title: () => (
+      <Grid placeItems="center start">
+     Daily Mileage
+        <Input prefix={<i className="fa fa-search" />} style={{ width: 40 }} />
+      </Grid>
+    ),
+    render: (a)=> <div>{a.dailyMilage|| 50} miles</div>,
   },
   {
     title: () => (
