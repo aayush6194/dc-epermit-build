@@ -114,7 +114,7 @@ export class MapContainer extends React.Component<any, any> {
                   
                   <h2>Location: {"Largo Town Center, Largo, MD 20774"}</h2>
                   <Text bold size='1.2em'> # of Chargers: 12</Text>
-                  <Text bold  size='1.2em'>Occupancy: 50 %</Text>
+                  <Text bold  size='1.2em'>Occupancy: 50%</Text>
                 </div>
               </InfoWindowEx>
             </Map>
