@@ -56,13 +56,16 @@ const Header = () => {
                     style={{ width: '300px', placeSelf: 'start', color: 'white' }}
                     disabled={loading}
                     placeholder="Select"
-                    value={'7925 Central Avenue Capitol Heights, MD 20743'}
+                    value={'Largo Town Center, Largo, MD 20774'}
                     >
       
                         <Select.Option
-                    
-                            value={"7925 Central Avenue Capitol Heights, MD 20743"}>
-                           7925 Central Avenue Capitol Heights, MD 20743
+                            value={"Largo Town Center, Largo, MD 20774"}>
+                           Largo Town Center, Largo, MD 20774
+                        </Select.Option>
+                        <Select.Option
+                            value={"1301 McCormick Drive, Upper Marlboro, MD 20774"}>
+                           1301 McCormick Drive, Upper Marlboro, MD 20774
                         </Select.Option>
                 </Select>
                 <Select
