@@ -182,7 +182,7 @@ const Finish = (props: ComponentProps) => {
     <Wrapper
     
       back={() => window.close()}
-      next={()=>setTimeout(()=>window.close(), 1000)}
+      next={()=>setTimeout(()=>window.location.reload(), 1000)}
       nextText="Great"
       disabledNext={false}
     >
