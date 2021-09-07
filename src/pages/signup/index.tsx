@@ -6,6 +6,8 @@ import moveLogo from "../../assets/movemv-logo.png";
 import finishLogo from "../../assets/security_512px.png";
 import { gradient, primaryColor } from "../../config";
 import { Checkbox, DatePicker, Input, Progress, Select } from "antd";
+import map from "../../assets/MVMapChoiceImage.png";
+
 import moment from "moment";
 const Signup = () => {
   const [step, setStep] = useState(0);
@@ -436,7 +438,7 @@ const PreferredParkingComp = ({ done}: {done?: boolean})=>{
 
     </Grid>
 
-    <img src='' alt='map' />
+    <img src={map} alt='map' style={{maxWidth: '100%'}}/>
   </Grid>
   <Grid customCols='1fr 1fr 1fr'>
     <Grid placeItems='start' placeSelf='start'>
