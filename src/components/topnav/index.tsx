@@ -21,7 +21,7 @@ const TopNavBar = ({ avatarImg }: { avatarImg: string }) => {
           className="capitalize bold txt-md txt-left"
           style={{ minWidth: "100px", width: "100%", color: primaryTxtColor }}
         >
-          {path?.includes('e-permit')? 'E-Permit': path?.replace(/\/|davis|calpoly|emp/g, "")}
+          City of Mountain View SAFE Parking Program
         </Text>
         <Textt
           className="pointer"

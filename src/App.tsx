@@ -6,6 +6,7 @@ import { Home,   Client, PermitsDavis, PermitsCalpoly  } from './pages';
 import logo from './assets/parkstash_logo.png'
 import { useSelector } from 'react-redux';
 import { Client as ClientType } from './store/reducer/clients';
+import Signup from './pages/signup';
 
 export const toRoute = (str: string) => str.toLowerCase().replace(/\s+/g, "-");
 
@@ -19,15 +20,11 @@ function App() {
   return (
    !state.loading? <ErrorBoundary>
         <Switch> 
-        <Route exact path="/e-permits/davis/emp" render={() => <PermitsDavis admin={false}/>} />
-          <Route exact path="/e-permits/davis" render={() => <PermitsDavis admin/>} />
+     
+          <Route path="/" render={() => <Signup/>} />
 
-          {clients.map((c: ClientType) => (
-          <Route exact path={`/e-permits/calpoly/${c.id}`} render={() => <PermitsCalpoly client={c}/>} />))}
+      
 
-          <Route exact path="/e-permits/calpoly" render={() => <PermitsCalpoly/>} />
-          <Route exact path="/client" render={() => <Client/>} />
-          <Route path="/" render={() => <Home/>} />
         </Switch>
     </ErrorBoundary>: <Loader.Custom logo={logo} />
   );
