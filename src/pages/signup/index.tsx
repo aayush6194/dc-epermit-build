@@ -374,7 +374,7 @@ const AdditionalInfoComp = ({ done}: {done?: boolean})=>{
       Please note: Only approved registered household members will be
       allowed. Guests are not allowed in vehicles or on property
     </Text>
-    <Select defaultValue={done? "2": "Make a selection"} style={{ minWidth: 150 }}>
+    <Select defaultValue={done? "Just me": "Make a selection"} style={{ minWidth: 150 }}>
       {["Just me", "2", "3", "4"].map((e) => (
         <Select.Option value={e}>{e}</Select.Option>
       ))}
@@ -473,7 +473,7 @@ const PreferredParkingComp = ({ done}: {done?: boolean})=>{
 const Review = (props: ComponentProps) => {
   return (
     
-    <Wrapper  back={props.back} next={props.next} disabledNext={false}>
+    <Wrapper  back={props.back} next={props.next} disabledNext={false} nextText='Submit'>
       <Card
   shadow={true}
   grid

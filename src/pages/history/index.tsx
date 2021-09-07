@@ -154,16 +154,11 @@ const columns = (
       dataIndex: "ends",
     },
     {
-      title: "Actions",
+      title: "Statis",
       render: (i: any) => (
-        <>
-          <Button rounded onClick={() => openBooking(i)}>
-            Approve
-        </Button>
-          <Button rounded bg="red">
-            Reject
-        </Button>
-        </>
+        <span style={{color: 'coral'}}>
+         Pending
+        </span>
       ),
     },
   ];
