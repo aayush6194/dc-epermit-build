@@ -270,30 +270,20 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
   },
 
 
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Council Member
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 50 }} />
-      </Grid>
-    ),
-    dataIndex: "parkingLot",
-  },
-
 
   {
     title: "Actions",
     render: (i: Permit) => (
       <>
         <Button rounded onClick={() => openBooking(i)} disabled={i.type === PermitType.Visitor}>
-          Extend
+          Approve
         </Button>
         <Popconfirm
           title='Are you sure you want to cancel the permit?'
          onConfirm={() => removePermit(i)}
         >
         <Button rounded  bg='red'>
-          Cancel
+          Reject
         </Button>
         </Popconfirm>  
       </>
