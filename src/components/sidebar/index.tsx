@@ -9,8 +9,8 @@ import avatar from '../../assets/UCDavisHealth-color.png';
 const Sidebar = ({ avatarImg }: { avatarImg: string }) => {
   const location = useLocation().pathname;
   const routes = [
-    { to: [`/e-permits`], name: "E-Permits", icon: "far s" },
-  
+    { to: [`/`], name: "New Application", icon: "fa fa-pencil" },
+    { to: [`/history`], name: "History", icon: "fa fa-history" },
   ];
 
   return (

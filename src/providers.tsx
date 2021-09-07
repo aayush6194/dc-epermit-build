@@ -19,6 +19,11 @@ const GlobalStyle = createGlobalStyle`
     box-shadow: 0 0.25em 0.3em ${primaryColor};
    }
 
+   .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: ${primaryColor};
+    border-color: ${primaryColor};
+}
+
   .ant-btn-primary, .ant-btn{
     border-radius: .3em;
     box-shadow: 0 .1em .1em rgba(0,0,0,.2);
