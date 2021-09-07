@@ -7,10 +7,11 @@ import finishLogo from "../../assets/security_512px.png";
 import { gradient, primaryColor } from "../../config";
 import { Checkbox, DatePicker, Input, Progress, Select } from "antd";
 import map from "../../assets/MVMapChoiceImage.png";
-
+import useQuery from "../../hooks/query";
 import moment from "moment";
 const Signup = () => {
-  const [step, setStep] = useState(0);
+  const { query } = useQuery();
+  const [step, setStep] = useState(query?.step || 0);
 
   const componentProps = {
     next: () => setStep(step + 1),
