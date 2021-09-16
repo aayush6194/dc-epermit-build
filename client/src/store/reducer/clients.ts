@@ -34,7 +34,7 @@ interface State {
   error: boolean;
   loading: boolean;
 }
-interface Actions {
+export interface Actions {
   type: ActionTypes;
   payload: Partial<State> & {
     client: Client;
