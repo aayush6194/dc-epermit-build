@@ -9,7 +9,7 @@ export enum ParkingLot {
 } 
 
 export enum Zone {
-  R1 = 'DIA',
+  R1 = 'R1',
   R2 = 'R2',
   R3 = 'R3',
   R4 = 'R4'
@@ -18,7 +18,7 @@ export enum Zone {
 export const defaultClients: Client[] = [
   {
     id: "1",
-    name: "10412 TULSA DRIVE",
+    name: "D.School",
     open: true,
     parkingSpace: 65,
     overbooking: true,
@@ -36,7 +36,7 @@ export const defaultClients: Client[] = [
   },
   {
     id: "2",
-    name: "6729 KNOLLBROOK DRIVE",
+    name: "Mechanical Engineering",
     open: false,
     parkingSpace: 120,
     overbooking: true,
@@ -55,7 +55,26 @@ export const defaultClients: Client[] = [
 
   {
     id: "3",
-    name: "2231 BEECHWOOD ROAD",
+    name: "Computer Science",
+    open: false,
+    parkingSpace: 100,
+    overbooking: true,
+    communication: true,
+  
+    parkingLot: [ParkingLot.Lot1],
+    zone: [Zone.R1],
+
+    employee: 90,
+    handicap: 10,
+    
+    employeeFee : 45,
+    handicapFee: 45,
+    residenceFee: 45
+  },
+
+  {
+    id: "4",
+    name: "Buisness School",
     open: false,
     parkingSpace: 100,
     overbooking: true,

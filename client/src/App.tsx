@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import ErrorBoundary from "antd/lib/alert/ErrorBoundary";
 import { Loader } from "platyplex_ui";
-import { Home, Client, PermitsCalpoly, Map, Events, Electric } from "./pages";
+import { Home, Client, Epermits, Map, Events, Electric } from "./pages";
 import logo from "./assets/parkstash_logo.png";
 import { useSelector } from "react-redux";
 import { Client as ClientType } from "./store/reducer/clients";
@@ -32,20 +32,20 @@ function App() {
       {!state.auth ? (
         <Switch>
           {permits.map((p: RootPermit, i) =>
-            p.residential.map((per: Permit, j) => (
+            p.residential?.map((per: Permit, j) => (
               <Route
                 exact
                 key={i + "" + j}
                 path={`/visitor/${i}/sub-resident/${j}`}
                 render={() => (
-                  <Visitor index={i} permit={p} name={per.firstName} />
+                  <Visitor index={i}  permit={per} rootPermit={p} name={per.firstName} />
                 )}
               />
             ))
           )}
 
           {permits.map((p: RootPermit, i) =>
-            p.visitor.map((per: Permit, j) => (
+            p.visitor?.map((per: Permit, j) => (
               <Route
                 key={i + "" + j}
                 exact
@@ -68,34 +68,34 @@ function App() {
             <Route
               exact
               path={`/e-permits/:id`}
-              render={() => <PermitsCalpoly client={c} />}
+              render={() => <Epermits isAdmin={false} client={c} />}
             />
           ))}
 
-          {permits.map((p: RootPermit, i) => (
+          {permits.map((p: any, i) => (
             <Route
               exact
               path={"/visitor/" + i}
-              render={() => <Visitor index={i} permit={p} />}
+              render={() => <Visitor permit={p as any}  rootPermit={p} index={i}/>}
             />
           ))}
 
 
           {permits.map((p: RootPermit, i) =>
-            p.residential.map((per: Permit, j) => (
+            p.residential?.map((per: Permit, j) => (
               <Route
                 exact
                 key={i + "" + j}
                 path={`/visitor/${i}/sub-resident/${j}`}
                 render={() => (
-                  <Visitor index={i} permit={p} name={per.firstName} />
+                  <Visitor index={i}  name={per.firstName} permit={per} rootPermit={p}/>
                 )}
               />
             ))
           )}
 
           {permits.map((p: RootPermit, i) =>
-            p.visitor.map((per: Permit, j) => (
+            p.visitor?.map((per: Permit, j) => (
               <Route
                 key={i + "" + j}
                 exact
@@ -111,10 +111,8 @@ function App() {
             ))
           )}
 
-
           <Route exact path="/citations/:id" render={() => <Events />} />
-          <Route exact path="/e-permits" render={() => <PermitsCalpoly />} />
-          <Route exact path="/client" render={() => <Client />} />
+          <Route exact path="/e-permits" render={() => <Epermits />} />
           <Route exact path="/map" render={() => <Map />} />
           <Route exact path="/legal" render={() => <Legal />} />
           <Route exact path="/enforment-electric-vehicles-dashboard" render={() => <Electric />} />
@@ -128,38 +126,5 @@ function App() {
   );
 }
 
-const VistorRoutes = ({ permits }: { permits: RootPermit[] }) => {
-  return (<>
-    {permits.map((p: RootPermit, i) =>
-      p.residential.map((per: Permit, j) => (
-        <Route
-          exact
-          key={i + "" + j}
-          path={`/visitor/${i}/sub-resident/${j}`}
-          render={() => (
-            <Visitor index={i} permit={p} name={per.firstName} />
-          )}
-        />
-      ))
-    )}
-
-    {permits.map((p: RootPermit, i) =>
-      p.visitor.map((per: Permit, j) => (
-        <Route
-          key={i + "" + j}
-          exact
-          path={`/visitor/${i}/sub-visitor/${j}`}
-          render={() => (
-            <SubVisitor
-              rootPermit={p}
-              permit={per}
-              name={per.firstName}
-            />
-          )}
-        />
-      ))
-    )}
-  </>)
-}
 
 export default App;

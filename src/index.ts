@@ -25,8 +25,8 @@ app.post('/api/epermit', async (req, res, next) => {
   const { epermit } = req.body;
   try {
     const added = await repo.postEpermit(epermit);
-    const addedEpermit = added?.ops[0]
-    res.status(200).json({ success: true, epermit: addedEpermit });
+    
+    res.status(200).json({ success: true });
 
   } catch (e) {
     res.json({ success: false, message: e.message || e});

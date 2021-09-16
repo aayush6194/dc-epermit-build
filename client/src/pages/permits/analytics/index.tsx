@@ -1,9 +1,9 @@
 import React from "react";
 import { Grid, Button, Card, Header, Notification, Text } from "platyplex_ui";
 import { Tooltip } from "antd";
-import { disabledTxtColor, primaryColor } from "../../../../config";
+import { disabledTxtColor, primaryColor } from "../../../config";
 import { useSelector } from "react-redux";
-import { Client } from "../../../../store/reducer/clients";
+import { Client } from "../../../store/reducer/clients";
 
 const Analytics = () => {
   const { clients } = useSelector((state: any) => state.clients);
@@ -15,7 +15,7 @@ const Analytics = () => {
           parkingSpace,
           employeeFee,
           handicapFee,
-          residenceFee,
+          
           employee,
           handicap,
         }: Client) => (
@@ -68,7 +68,7 @@ const Analytics = () => {
             <Text>
               Total Monthly Fee:{" "}
               <span style={{ color: primaryColor }} className="bold">
-                ${employeeFee * employee + handicap * handicapFee}
+                ${(employeeFee * employee + handicap * handicapFee) || 100}
               </span>
             </Text>
           </Card>

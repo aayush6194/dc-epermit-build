@@ -13,8 +13,7 @@ const Client = () => {
         height="100%"
         style={{ maxWidth: "1300px", margin: "2em auto" }}
       >
-        {/* <Header>City of DC</Header> */}
-        <Form />
+        <Form admin={false}/>
       </Grid>
     </Layout>
   );

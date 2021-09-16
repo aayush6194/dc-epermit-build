@@ -5,7 +5,7 @@ import { Input, DatePicker, Select } from "antd";
 import { gradient, primaryColor } from "../../config";
 import { moment } from "../../utils/time";
 import { useDispatch, useSelector } from "react-redux";
-import { addPermit } from "../../store/actions/permits";
+import { addPermit ,addResidence} from "../../store/actions/permits";
 import api from "../../api";
 import { ParkingLot, Zone } from "../../store/actions/clients";
 import { PermitType } from "../../store/reducer/permit";
@@ -31,7 +31,16 @@ const defaultValue = {
   parkingLot: ParkingLot.Lot1,
 };
 
-const Form = ({ admin, header, onSubmit, link, partial, length }: any) => {
+const Form = ({ admin, header, onSubmit, link, partial, length, defaultValues, rootPermitId }: {
+  admin: boolean,
+   header?: any,
+    onSubmit?: any,
+     link?: string, 
+     partial?: any, 
+     length?: any,
+     defaultValues?: any
+     rootPermitId?: any;
+}) => {
   const [user, setUser] = useState<any>(defaultValue);
   const submit = (values: any) => {
     setUser(values);
@@ -41,7 +50,7 @@ const Form = ({ admin, header, onSubmit, link, partial, length }: any) => {
   return user.done ? (
     <Message reset={reset} user={user} admin={admin} />
   ) : (
-    <FormComp submit={submit} admin={admin} header={header} dontAdd={!!onSubmit} link={link} partial={partial} length={length}/>
+    <FormComp defaultValues={defaultValues} rootPermitId={rootPermitId} submit={submit} admin={admin} header={header} dontAdd={!!onSubmit} link={link} partial={partial} length={length}/>
   );
 };
 
@@ -159,10 +168,11 @@ const vehicleFields = [
   },
 ] as any;
 
-const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = []}: any) => {
+const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [], defaultValues, rootPermitId}: any) => {
   const dispatch = useDispatch();
   const { clients } = useSelector((state: any) => state.clients);
   let { id } = useParams() as any;
+  const isCompleting = defaultValues? true: false;
   const {
     handleSubmit,
     handleChange,
@@ -170,10 +180,15 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = []}
     values,
     setFieldValue,
   } = useFormik({
-    initialValues: defaultValue,
+    initialValues: {...defaultValue, ...defaultValues, isCompleting},
     async onSubmit(values) {
       if(!dontAdd){
-        dispatch(addPermit(values));
+        if(rootPermitId){
+          dispatch(addResidence(values, rootPermitId, values.type));
+        } else {
+          dispatch(addPermit(values));
+        }
+       
       }
       
       api
@@ -196,15 +211,18 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = []}
     },
   });
 
+  const defaultLocation = "Palo Alto, Mountain View"
   useEffect(() => {
     if (id) {
       const index = Number(id) - 1;
-      setFieldValue("employer", clients[index]?.name || "10412 TULSA DRIVE");
+      setFieldValue("employer", clients[index]?.name || defaultLocation);
     }
   }, []);
 
   const patients = clients[0]?.parkingSpace || 10;
-  const error = vehicleFields.reduce(
+  const error = 
+  admin? (!values.email &&  !values.phone):
+  vehicleFields.reduce(
     (acc: boolean, { id }: any) =>
       acc || Boolean(errors[id as Values]) || !values[id as Values],
     false
@@ -241,6 +259,39 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = []}
       <form onSubmit={handleSubmit}>
         <Grid placeItems="stretch" cols="2" gridGap="2em 4em">
           
+        {admin? 
+        <>
+        <div style={{ paddingTop: ".5em" }}>
+            <Text textAlign="left" color={primaryColor} bold>
+              Email
+            </Text>
+
+            <Input
+                    style={{ minWidth: "20vw", background: "transparent" }}
+                    name={'email'}
+                    value={values.email}
+                    onChange={handleChange}
+                    placeholder={"Enter the Email"}
+                  />
+          </div>
+
+
+          <div style={{ paddingTop: ".5em" }}>
+            <Text textAlign="left" color={primaryColor} bold>
+              Phone #
+            </Text>
+
+            <Input
+                    style={{ minWidth: "20vw", background: "transparent" }}
+                    name={'phone'}
+                    value={values.phone}
+                    onChange={handleChange}
+                    placeholder={"Enter the Phone Number"}
+                  />
+          </div>
+        </>
+        :
+        <>
         <div style={{ paddingTop: ".5em" }}>
             <Text textAlign="left" color={primaryColor} bold>
               Permit Type
@@ -249,17 +300,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = []}
             <Select
               style={{ width: "100%" }}
               value={values.type}
-              onChange={(e) => {
-                const endDate = moment();
-                if(e === 'Residential'){
-                  endDate.set('year', 2023)
-                } else {
-                  endDate.add('day', 3)
-                }
-                setFieldValue('starts', moment().format("ddd, MMM DD, YYYY @ hh:mm A"));
-                setFieldValue('ends', endDate.format("ddd, MMM DD, YYYY @ hh:mm A"));
-                setFieldValue("type", e);
-              }}
+              onChange={(e) => setFieldValue("type", e) }
             >
               {Object.keys(PermitType).map((v) => (
                 <Select.Option value={v}>{v}</Select.Option>
@@ -269,7 +310,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = []}
 
           <div style={{ paddingTop: ".5em" }}>
             <Text textAlign="left" color={primaryColor} bold>
-              Address
+              Department
             </Text>
 
             <Select
@@ -309,7 +350,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = []}
                     format="ddd, MMM, DD, YYYY, hh:mm a"
                     showTime={{ format: "hh:mm A" }}
                     minuteStep={15}
-                    disabled
+            
                     style={{ minWidth: "20vw", background: "transparent" }}
                     onChange={(e) =>
                       setFieldValue(
@@ -323,6 +364,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = []}
                   <Input
                     style={{ minWidth: "20vw", background: "transparent" }}
                     name={id}
+                    disabled={defaultValues? defaultValues[id]? true: false : false}
                     value={values[id]}
                     onChange={handleChange}
                     placeholder={placeholder}
@@ -340,32 +382,17 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = []}
 
             <Select
               style={{ width: "100%" }}
-              value={"Beltville, MD"}
+              defaultValue={defaultLocation}
               disabled={id !== undefined}
               onChange={(e) => setFieldValue("zone", e)}
             >
-              <Select.Option value={"Beltville, MD"}>
-                {"Beltville, MD"}
+              <Select.Option value={defaultLocation}>
+                {defaultLocation}
               </Select.Option>
             </Select>
           </div>
 
-          <div style={{ paddingTop: ".5em" }}>
-            <Text textAlign="left" color={primaryColor} bold>
-              Council Member
-            </Text>
-
-            <Select
-              style={{ width: "100%" }}
-              value={values.parkingLot}
-              disabled={id !== undefined}
-              onChange={(e) => setFieldValue("parkingLot", e)}
-            >
-              {Object.values(ParkingLot).map((v) => (
-                <Select.Option value={v}>{v}</Select.Option>
-              ))}
-            </Select>
-          </div>
+      
           <div style={{ paddingTop: ".5em" }}>
             <Text textAlign="left" color={primaryColor} bold>
               Zone
@@ -382,6 +409,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = []}
               ))}
             </Select>
           </div>
+          </>}
           <div style={{ gridColumn: "span 2", display: "grid" }}>
             <Button.Normal
               style={{

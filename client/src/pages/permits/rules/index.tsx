@@ -8,23 +8,22 @@ import {
   List,
   Placeholder,
 } from "platyplex_ui";
-import Collapse from "../../../../components/collapse";
+import Collapse from "../../../components/collapse";
 import {
   InputNumber,
   Switch as SwitchAtnd,
   Select,
   Popconfirm,
   Input,
-  DatePicker,
 } from "antd";
-import Bar from "../../../../components/bar";
+import Bar from "../../../components/bar";
 import { useDispatch, useSelector } from "react-redux";
-import { Client, ParkingLot, Zone } from "../../../../store/reducer/clients";
+import { Client, ParkingLot, Zone } from "../../../store/reducer/clients";
 import {
   addClient,
   editClient,
   removeClient,
-} from "../../../../store/actions/clients";
+} from "../../../store/actions/clients";
 import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 

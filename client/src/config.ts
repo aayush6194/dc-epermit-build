@@ -24,8 +24,9 @@ export const top3 = 100;
 export const top2 = 1000;
 export const top1 = 10000;
 export const API = "https://test.findparkstash.com/api";
-export const API2 = "https://epermit.findparkstash.com/api";
+export const url = 'https://standford-epermit.findparkstash.com'
+export const API2 = url  + "/api";
 export const defaultLocation =  {lat: 39.02653927586001, lng: -76.95245338598109};
 export const token = 'jTVnIl0ahL'
-export const url = 'https://epermit.findparkstash.com'
+
 

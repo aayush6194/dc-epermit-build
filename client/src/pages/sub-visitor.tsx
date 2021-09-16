@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../layout";
-import { Grid, Switch, Card, Text } from "platyplex_ui";
-import { primaryColor, primaryTxtColor } from "../config";
+import { Grid, Card, Text } from "platyplex_ui";
+import { primaryColor } from "../config";
 import user from "../assets/user.svg";
 import permitt from "../assets/permit.svg";
 import { Permit, RootPermit } from "../store/reducer/permit";
-
+import Form from "./client/form";
 const SubVisitor = ({
   permit,
   rootPermit,
@@ -38,7 +38,7 @@ const SubVisitor = ({
               Hello, {name || permit.firstName}!
             </Text>
           </Card>
-
+         
           <PermitCard permit={permit} rootPermit={rootPermit}/>
         </Grid>
       </Layout.Bottom>
@@ -53,7 +53,10 @@ export const PermitCard = ({
   permit: Permit | RootPermit;
   rootPermit: RootPermit
 })=>{
-  return   <Card grid>
+  return  !permit.firstName?
+  <Form admin={false} defaultValues={permit} rootPermitId={rootPermit._id}/>:
+  
+  <Card grid>
   <div style={{maxWidth: '90vw', width: 700}}>
     <Text bold  textAlign="right" color={primaryColor}>
       ({Math.abs(3 - rootPermit.residential.length)}/3) Residents Permit Remaining

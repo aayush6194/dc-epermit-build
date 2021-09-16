@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Grid, Modal, Switch, Card, Button, Text } from "platyplex_ui";
-import { gradient, primaryColor, primaryTxtColor } from "../../../../config";
-import { Table, Input, Select, Progress, TimePicker, Popover, Popconfirm } from "antd";
-import { Message } from "../../../client/form";
-import { moment } from "../../../../utils/time";
-import { Client } from "../../../../store/reducer/clients";
+import { gradient, primaryColor, primaryTxtColor } from "../../../config";
+import { Table, Input, Select,  Popconfirm } from "antd";
+import { Message } from "../../client/form";
+import { moment } from "../../../utils/time";
+import { Client } from "../../../store/reducer/clients";
 import { useDispatch, useSelector } from "react-redux";
-import { Permit, PermitType, RootPermit } from "../../../../store/reducer/permit";
-import { removePermit } from "../../../../store/actions/permits";
+import { Permit, PermitType, RootPermit } from "../../../store/reducer/permit";
+import { removePermit } from "../../../store/actions/permits";
 import { useParams } from "react-router";
 
 enum HistoryState {

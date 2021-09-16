@@ -9,19 +9,6 @@ function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-const getTime = () => {
-  let t1 = moment().set("dayOfYear", getRandom(1, 120));
-  let t2 = moment(t1).add("year", 2);
-  const remainder = 15 - (t1.minute() % 15);
-  t1.add(remainder, "minutes");
-  t2.add(remainder, "minutes");
-  const starts = t1.format("ddd, MMM DD, YYYY @ hh:mm A");
-  const ends = t2.format("ddd, MMM DD, YYYY @ hh:mm A");
-  return {
-    starts,
-    ends,
-  };
-};
 
 
 export const dataSource: RootPermit[] = [];
@@ -128,14 +115,14 @@ export const editPermit = (permit: RootPermit, modal = ErrorModal) => {
 
 export const addResidence = (
   p: Permit,
-  rootPermit: RootPermit,
+  rootPermit_id: string,
   type: PermitType
 ) => {
 
   return async (dispatch: any) => {
     asyncActions(dispatch, async () =>{
       
-      const res = await api.addResidence(p, rootPermit._id);
+      const res = await api.addResidence(p, rootPermit_id);
       if(!res?.success) throw new Error('Error Adding');
 
      // const { epermit } = res;

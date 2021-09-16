@@ -28,7 +28,7 @@ enum User {
   HISTORY = "HISTORY",
 }
 
-const Visitor = ({ permit, name, index }: { permit: RootPermit, name?: string, index: number}) => {
+const Visitor = ({ rootPermit, name, index, permit, }: { permit: Permit, rootPermit: RootPermit,  name?: string, index: number}) => {
   const [state, setter] = useState<any>({
     as: User.PERMIT,
   });
@@ -67,28 +67,28 @@ const Visitor = ({ permit, name, index }: { permit: RootPermit, name?: string, i
             />
           </Card>
 
-          {state.as === User.PERMIT? <PermitCard permit={permit} rootPermit={permit} />:
+          {state.as === User.PERMIT? <PermitCard permit={permit} rootPermit={rootPermit} />:
           
           state.as === User.HISTORY ? (
-            <History permit={permit} />
+            <History permit={rootPermit} />
           ) : (
             <Card grid>
               <Form
                 admin
                 partial
                 link={`${url}/visitor/${index}`}
-                length={[permit.residential.length, [permit.visitor.length]]}
-                style={{ width: "100%" }}
+                length={[rootPermit.residential.length, [rootPermit.visitor.length]]}
+                
                 onSubmit={(e: Permit)=>{
-                  dispatch(addResidence(e, permit, e.type))
+                  dispatch(addResidence(e, rootPermit._id, e.type))
                 }}
                 header={
                   <div>
                     <Text bold textAlign="right" color={primaryColor}>
-                      ({3- permit.residential.length}/3) Residents Permit Remaining
+                      ({3- rootPermit.residential.length}/3) Residents Permit Remaining
                     </Text>
                     <Text bold textAlign="right" color={primaryColor}>
-                      ({2 - permit.visitor.length}/2) Visitors Remaining
+                      ({2 - rootPermit.visitor.length}/2) Visitors Remaining
                     </Text>
                   </div>
                 }

@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import Layout from "../../../layout";
+import Layout from "../../layout";
 import { Grid, Switch, Card, Text } from "platyplex_ui";
-import { primaryColor, primaryTxtColor, url } from "../../../config";
+import { primaryColor, primaryTxtColor, url } from "../../config";
 import Analytics from "./analytics";
 import Rules from "./rules";
 import History from "./history";
-import img from "../../../assets/CalPolyLogo.png";
-import user from "../../../assets/user.svg";
-import { Client } from "../../../store/reducer/clients";
-import Form from "../../client/form";
-import TowNotification from "./tow";
-import TowRegistration from "./tow-registration";
-import TowRegistrationHistory from "./tow-registration-history";
+import img from "../../assets/CalPolyLogo.png";
+import user from "../../assets/user.svg";
+import { Client } from "../../store/reducer/clients";
+import Form from "../client/form";
 import { useSelector } from "react-redux";
 interface Body {
   firstName: string;
@@ -33,20 +30,17 @@ enum User {
 enum Admin {
   GENERATE = "GENERATE",
   HISTORY = "HISTORY",
-  REGISTRATION = "REGISTRATION",
   ANALYTICS = "ANALYTICS",
   RULES = "RULES",
-  TOW_REGISTRATION = "TOW_REGISTRATION",
-  TOW_NOTIFICATION = "TOW_NOTIFICATION",
 }
 
-const Permits = ({ client }: { client?: Client }) => {
+const Permits = ({ client, isAdmin }: { client?: Client, isAdmin?: boolean}) => {
   const [state, setter] = useState<any>({
     as: User.GENERATE,
   });
 
   const { permits } = useSelector((state: any) => state.permits);
-  const admin = !client;
+  const admin = isAdmin || !client;
   const setState = (props: any) => setter({ ...state, ...props });
   return (
     <Layout
@@ -89,19 +83,8 @@ const Permits = ({ client }: { client?: Client }) => {
             </Card>
           ) : state.as === Admin.RULES ? (
             <Rules />
-          ) : state.as === Admin.ANALYTICS ? (
-            <Analytics />
-          ) : state.as === Admin.TOW_NOTIFICATION ? (
-           
-              <TowRegistration />
-          ) : state.as === Admin.TOW_REGISTRATION ? (
-            <Card grid>
-              <TowNotification />
-            </Card>
           ) : (
-            <Card grid>
-              <TowRegistrationHistory />
-            </Card>
+            <Analytics />
           )}
         </Grid>
       </Layout.Bottom>
