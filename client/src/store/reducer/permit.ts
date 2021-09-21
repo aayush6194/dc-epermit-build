@@ -21,6 +21,17 @@ export interface Permit {
   employer: number;
 }
 
+export enum ActionTypes {
+  ADD_PERMIT = "ADD_PERMIT",
+  REMOVE_PERMIT = "REMOVE_PERMIT",
+  LOAD_PERMIT = "LOAD_PERMIT",
+  EDIT_PERMIT = "EDIT_PERMIT",
+  REQUEST_PERMIT = "REQUEST_PERMIT",
+  ERROR_PERMIT = "ERROR_PERMIT",
+  SUCCESS_PERMIT = "SUCCESS_PERMIT",
+}
+
+
 export interface RootPermit extends Permit {
   residential: Permit[];
   visitor: Permit[];
@@ -31,7 +42,7 @@ interface State {
   error: boolean;
   loading: boolean;
 }
-interface Actions {
+export interface Actions {
   type: ActionTypes;
   payload: Partial<State> & {
     permit: RootPermit;
@@ -44,15 +55,7 @@ const intialState: State = {
   loading: false,
 };
 
-export enum ActionTypes {
-  ADD_PERMIT = "ADD_PERMIT",
-  REMOVE_PERMIT = "REMOVE_PERMIT",
-  LOAD_PERMIT = "LOAD_PERMIT",
-  EDIT_PERMIT = "EDIT_PERMIT",
-  REQUEST_PERMIT = "REQUEST_PERMIT",
-  ERROR_PERMIT = "ERROR_PERMIT",
-  SUCCESS_PERMIT = "SUCCESS_PERMIT",
-}
+
 
 export default function rootReducer(state = intialState, action: Actions): any {
   let permits = [...state.permits] as any;

@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.js": "/static/js/main.df8bf890.chunk.js",
+    "main.js.map": "/static/js/main.df8bf890.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.75404bae.js",
+    "runtime-main.js.map": "/static/js/runtime-main.75404bae.js.map",
+    "static/css/2.125bacdb.chunk.css": "/static/css/2.125bacdb.chunk.css",
+    "static/js/2.48cbfbac.chunk.js": "/static/js/2.48cbfbac.chunk.js",
+    "static/js/2.48cbfbac.chunk.js.map": "/static/js/2.48cbfbac.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.2b6486d0fa671cc6f9b8ec3099be6e64.js": "/precache-manifest.2b6486d0fa671cc6f9b8ec3099be6e64.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.125bacdb.chunk.css.map": "/static/css/2.125bacdb.chunk.css.map",
+    "static/js/2.48cbfbac.chunk.js.LICENSE.txt": "/static/js/2.48cbfbac.chunk.js.LICENSE.txt",
+    "static/media/CalPolyLogo.png": "/static/media/CalPolyLogo.cbd4b3f8.png",
+    "static/media/empty.svg": "/static/media/empty.3e935ffe.svg",
+    "static/media/loader.svg": "/static/media/loader.27ca61a6.svg",
+    "static/media/logo.png": "/static/media/logo.cd8c6277.png",
+    "static/media/message3.svg": "/static/media/message3.10cb2302.svg",
+    "static/media/parkstash_logo.png": "/static/media/parkstash_logo.ab0d6bfb.png",
+    "static/media/permit.svg": "/static/media/permit.85a76f93.svg",
+    "static/media/user.svg": "/static/media/user.7a21cbe9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.75404bae.js",
+    "static/css/2.125bacdb.chunk.css",
+    "static/js/2.48cbfbac.chunk.js",
+    "static/js/main.df8bf890.chunk.js"
+  ]
+}

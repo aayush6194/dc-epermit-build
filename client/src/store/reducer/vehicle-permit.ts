@@ -5,6 +5,14 @@ export enum PermitType {
   Residential = 'Residential',
   Visitor = 'Visitor'
 };
+export enum ActionTypes {
+  ADD_V_PERMIT = "ADD_V_PERMIT",
+  LOAD_V_PERMIT = "LOAD_V_PERMIT",
+  REQUEST_V_PERMIT = "REQUEST_V_PERMIT",
+  ERROR_V_PERMIT = "ERROR_V_PERMIT",
+  SUCCESS_V_PERMIT = "SUCCESS_V_PERMIT",
+}
+
 
 export interface VehiclePermit{
   _id?: string;
@@ -35,13 +43,6 @@ const intialState: State = {
   loading: false,
 };
 
-export enum ActionTypes {
-  ADD_V_PERMIT = "ADD_V_PERMIT",
-  LOAD_V_PERMIT = "LOAD_V_PERMIT",
-  REQUEST_V_PERMIT = "REQUEST_V_PERMIT",
-  ERROR_V_PERMIT = "ERROR_V_PERMIT",
-  SUCCESS_V_PERMIT = "SUCCESS_V_PERMIT",
-}
 
 export default function rootReducer(state = intialState, action: Actions): State {
   let vehiclePermits = [...state.vehiclePermits] as any;

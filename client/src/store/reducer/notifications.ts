@@ -15,7 +15,14 @@ interface State {
   error: boolean;
   loading: boolean;
 }
-interface Actions {
+
+export enum ActionTypes {
+  ADD_NOTIFICATION = "ADD_NOTIFICATION",
+  REMOVE_NOTIFICATION = "REMOVE_NOTIFICATIONT",
+  LOAD_NOTIFICATION = "LOAD_NOTIFICATION",
+}
+
+export interface Actions {
   type: ActionTypes;
   payload: Partial<State> & {
     notification: Notification;
@@ -28,11 +35,6 @@ const intialState: State = {
   loading: false,
 };
 
-export enum ActionTypes {
-  ADD_NOTIFICATION = "ADD_NOTIFICATION",
-  REMOVE_NOTIFICATION = "REMOVE_NOTIFICATIONT",
-  LOAD_NOTIFICATION = "LOAD_NOTIFICATION",
-}
 
 export default function rootReducer(state = intialState, action: Actions): any {
   let notifications = [...state.notifications] as any;

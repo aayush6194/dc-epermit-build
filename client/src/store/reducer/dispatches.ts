@@ -16,6 +16,12 @@ interface State {
   error: boolean;
   loading: boolean;
 }
+
+export enum ActionTypes {
+  ADD_DISPATCH = "ADD_DISPATCH",
+  LOAD_DISPATCH = "LOAD_DISPATCH",
+}
+
 export interface Actions {
   type: ActionTypes;
   payload: Partial<State> & { 
@@ -29,10 +35,6 @@ const intialState: State = {
   loading: false,
 };
 
-export enum ActionTypes {
-  ADD_DISPATCH = "ADD_DISPATCH",
-  LOAD_DISPATCH = "LOAD_DISPATCH",
-}
 
 export default function rootReducer(state = intialState, action: Actions): any {
   let dispatches = [...state.dispatches] as any;

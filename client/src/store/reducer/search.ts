@@ -21,6 +21,11 @@ export interface SearchNearbyQuery {
   vehicle_classes: string[];
   booking_type: "daily" | "weekly" | "monthly";
 }
+export enum ActionTypes {
+  SET_SEARCH = "SET_SEARCH",
+  SET_ADDRESS_DATA = "SET_ADDRESS_DATA",
+ // SET_START_DATE = 'SET_START_DATE'
+}
 
 export interface SearchStoreState {
   query: SearchNearbyQuery;
@@ -55,11 +60,7 @@ const intialState: SearchStoreState = {
   loading: false,
 };
 
-export enum ActionTypes {
-  SET_SEARCH = "SET_SEARCH",
-  SET_ADDRESS_DATA = "SET_ADDRESS_DATA",
- // SET_START_DATE = 'SET_START_DATE'
-}
+
 
 export default function rootReducer(state = intialState, action: Actions): any {
   switch (action.type) {

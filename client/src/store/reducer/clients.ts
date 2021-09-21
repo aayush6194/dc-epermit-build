@@ -34,6 +34,16 @@ interface State {
   error: boolean;
   loading: boolean;
 }
+export enum ActionTypes {
+  ADD_CLIENT = "ADD_CLIENT",
+  REMOVE_CLIENT = "REMOVE_CLIENT",
+  LOAD_CLIENT = "LOAD_CLIENT",
+  EDIT_CLIENT = "EDIT_CLIENT",
+  REQUEST_CLIENT = "REQUEST_CLIENT",
+  ERROR_CLIENT = "ERROR_CLIENT",
+  SUCCESS_CLIENT = "SUCCESS_CLIENT",
+};
+
 export interface Actions {
   type: ActionTypes;
   payload: Partial<State> & {
@@ -47,15 +57,7 @@ const intialState: State = {
   loading: false,
 };
 
-export enum ActionTypes {
-  ADD_CLIENT = "ADD_CLIENT",
-  REMOVE_CLIENT = "REMOVE_CLIENT",
-  LOAD_CLIENT = "LOAD_CLIENT",
-  EDIT_CLIENT = "EDIT_CLIENT",
-  REQUEST_CLIENT = "REQUEST_CLIENT",
-  ERROR_CLIENT = "ERROR_CLIENT",
-  SUCCESS_CLIENT = "SUCCESS_CLIENT",
-}
+
 
 export default function rootReducer(state = intialState, action: Actions): any {
   let clients = [...state.clients] as any;

@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/epermit/:id', async (req, res, next) => {
+app.get('/api/epermit/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
     const epermits = await repo.getPermit(id === 'all' ? undefined : new ObjectId(id));
@@ -21,7 +21,7 @@ app.get('/epermit/:id', async (req, res, next) => {
   }
 });
 
-app.post('/epermit', async (req, res, next) => {
+app.post('/api/epermit', async (req, res, next) => {
   const { epermit } = req.body;
   try {
     const added = await repo.postEpermit(epermit);
@@ -33,7 +33,7 @@ app.post('/epermit', async (req, res, next) => {
   }
 });
 
-app.post('/epermit/:id', async (req, res, next) => {
+app.post('/api/epermit/:id', async (req, res, next) => {
   const { id } = req.params;
   const { epermit } = req.body;
   try {
@@ -47,7 +47,7 @@ app.post('/epermit/:id', async (req, res, next) => {
 });
 
 
-app.delete('/epermit/all', async (req, res, next) => {
+app.delete('/api/epermit/all', async (req, res, next) => {
   try {
     await repo.removeEpermit();
     res.status(200).json({ success: true });
@@ -60,7 +60,7 @@ app.delete('/epermit/all', async (req, res, next) => {
 
 
 
-app.delete('/epermit/reset', async (req, res, next) => {
+app.delete('/api/epermit/reset', async (req, res, next) => {
   try {
     await repo.reset();
     res.status(200).json({ success: true });

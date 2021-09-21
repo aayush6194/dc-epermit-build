@@ -24,9 +24,9 @@ export const top3 = 100;
 export const top2 = 1000;
 export const top1 = 10000;
 export const API = "https://test.findparkstash.com/api";
-export const url = 'https://stanford-epermit.findparkstash.com'
+export const url = 'https://stanford.findparkstash.com/api'
 export const localAPI = 'http://localhost:8902'
-export const API2 =    localAPI || (url + "/api");
+export const API2 =   (url);
 export const defaultLocation =  {lat: 39.02653927586001, lng: -76.95245338598109};
 export const token = 'jTVnIl0ahL'
 
