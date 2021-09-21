@@ -691,7 +691,7 @@ export const getEmailTemplate = (reciever: UserInfo)=>`
 									Your License plate #: <b>${reciever.licensePlate} </b>                      <br />
 									`: ""}
                             
-                                    Issued By: <b>${ENTERPRISE} (${reciever.department})</b>     <br />
+                                    Issued By: <b>${ENTERPRISE} (${reciever.department || 'D.School'})</b>     <br />
                                     Valid From : <b>${reciever.starts}  </b>              <br />
                                     Valid Until : <b>${reciever.ends}  </b>              <br />
                                     Confirmation number : <b>${reciever.id}  </b>            <br />

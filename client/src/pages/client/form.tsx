@@ -216,7 +216,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
 
       if(values.phone){
         api
-        .customSms(values.email, info)
+        .customSms(values.phone, info)
         .catch((e) => console.log(e))
       }
 
