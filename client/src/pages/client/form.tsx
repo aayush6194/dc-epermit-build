@@ -191,23 +191,37 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
         }
        
       }
-      
-      api
-        .sendEmail({
-          firstName: values.firstName,
-          lastName: values.lastName,
-          email: values.email,
-          licensePlate: values.liscensePlate,
-          phone: values.phone,
-          end: values.ends,
-          type: values.type,
-          vaccine: clients[0]?.vaccine,
-          date: moment(values.starts).toISOString(),
-          location: clients[0]?.name,
-          space: 1,
-          link: partial? link + `/sub-${values.type === 'Residential'? 'resident': 'visitor'}/${values.type === 'Residential'? length[0]: length[1]}` : link
-        })
-        .catch((e) => console.log(e));
+
+      const info =  {
+        id: values._id || random(5),
+        isCompleting: values.firstName? true: false,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        licensePlate: values.liscensePlate,
+        phone: values.phone,
+        starts: values.starts,
+        ends: values.ends,
+        type: values.type,
+        department: clients[0]?.vaccine,
+        location: clients[0]?.name,
+        link: partial? link + `/sub-${values.type === 'Residential'? 'resident': 'visitor'}/${values.type === 'Residential'? length[0]: length[1]}` : link
+      }
+
+      if(values.email){
+        api
+        .customEmail (values.email, info)
+        .catch((e) => console.log(e))
+      }
+
+      if(values.phone){
+        api
+        .customSms(values.email, info)
+        .catch((e) => console.log(e))
+      }
+
+
+   
       submit({ ...values, done: true });
     },
   });

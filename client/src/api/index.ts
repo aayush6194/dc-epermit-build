@@ -1,11 +1,36 @@
 
 import { post, authGet, authPost, customPost, authUpload, get, authDelete , deleteReq} from './request';
-import { API, API2, googleAPIKey  } from '../config'
+import { API, API2, ENTERPRISE, googleAPIKey  } from '../config'
 import { EditAnnouncement, AddAnnouncement } from '../model/domain/announcements';
 import { Garage, UpdateGarageModel, GarageOccupancyTable, AddGarageModel } from '../model/domain/garage';
 import { FlatValue, TimeSeries } from '../model/domain/metrics';
 import { EnterpriseRole } from '../model/domain/enterprise';
 import { RootPermit } from '../store/reducer/permit';
+import { getEmailTemplate } from '../utils/email';
+
+export interface UserInfo {
+  id: string;
+  firstName: string;
+  lastName: string;
+  department: string;
+  starts: string;
+  ends: string;
+  licensePlate: string;
+  type: string;
+  phone: string;
+  email: string;
+  location: string;
+  link: string;
+  isCompleting: boolean;
+}
+
+
+const getMessageTemplate =(info: UserInfo)=>{
+  return `E-Permit request confirmation: ${info.id}. \n
+  Hi ${info.firstName}, your request for E-permit from the ${ENTERPRISE} ${info.department? "(" +info.department+ ")": ""} has been confirmed with ParkStash and it starts at ${info.starts} and ends on ${info.ends}. More detail has been sent to your email.
+  Navigate here: ${info.link}`;
+}
+
 interface Body {
   firstName: string;
   lastName: string;
@@ -22,7 +47,6 @@ interface Body {
 }
 
 const getPlaces = (addr: string)=> fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addr}&key=${googleAPIKey}`).then((res) => res.json()) 
-const sendEmail = (body: Body) => authPost('https://test.findparkstash.com/api/v1/utils/notifyDC', body);
 const sendTowEmail = (body: Body) => authPost('https://test.findparkstash.com/api/v1/utils/tow', body);
 const sendTowEmail2 = (body: Body) => authPost('https://test.findparkstash.com/api/v1/utils/tow2', body);
 const route = (route : string )=> API + route;
@@ -102,6 +126,22 @@ const getCapabilityDescriptors = ()=> authGet(route(`/v1/enterprises/capabilityD
  
  const resetEpermit = () => deleteReq(route2("/epermit/reset"));
  const addResidence = (epermit: Partial<RootPermit>, eId: string) => post(route2("/epermit/"+ eId), { epermit } , false);
+
+
+ const customEmail = (to: string, info: UserInfo) => authPost('https://test.findparkstash.com/api/v1/testOnly/email', {
+  "from" :"ParkStash <important@findparkstash.com>",
+   to,
+  "subject": "ParkStash E-Permit Details",
+  "html": getEmailTemplate(info)
+});
+
+const customSms = (to: string, info: UserInfo) => authPost('https://test.findparkstash.com/api/v1/testOnly/sms', {
+   to,
+  "msg": getMessageTemplate(info)
+});
+
+
+
 export default {
   getGarages, getTimeSeries, addGarage, editGarage,
   auth, getUser, login, signup, getTimeSeriesMetricDescriptor,
@@ -114,7 +154,8 @@ export default {
   getOccupancyTables, addOccupancyTable, removeOccupancyTable, editOccupancyTable, getOccupancyTableById,
   downloadCSv, getConfig,  getAbnormalityEvent, getPastAbnormalityEvent, uploadImage, getImageUrl, getCapabilityDescriptors,
   removeRole, editRole, assignRole, addRole, listMyScoreCardDescriptors, getScoreCardValues, listScoreCardDescriptors,
-  sendEmail,
+  
   getPlaces, sendTowEmail, sendTowEmail2,
-  getAllPermits, addEpermit, addResidence, resetEpermit
+  getAllPermits, addEpermit, addResidence, resetEpermit,
+  customEmail, customSms
  }
