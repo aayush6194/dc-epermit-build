@@ -99,7 +99,7 @@ export const Message = ({
         </Text>
       ) : (
         <Text>
-          Confirmation details have been sent to email ({user.email}).
+          Confirmation details have been sent to ({user.email || user.phone}).
         </Text>
       )}
       <Button.Normal
