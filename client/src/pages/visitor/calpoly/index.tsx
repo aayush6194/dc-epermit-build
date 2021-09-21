@@ -28,7 +28,7 @@ enum User {
   HISTORY = "HISTORY",
 }
 
-const Visitor = ({ rootPermit, name, index, permit, }: { permit: Permit, rootPermit: RootPermit,  name?: string, index: number}) => {
+const Visitor = ({ rootPermit, name, index, permit }: { permit: Permit, rootPermit: RootPermit,  name?: string, index: number}) => {
   const [state, setter] = useState<any>({
     as: User.PERMIT,
   });

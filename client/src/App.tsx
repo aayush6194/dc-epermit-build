@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import ErrorBoundary from "antd/lib/alert/ErrorBoundary";
 import { Loader } from "platyplex_ui";
-import { Home, Client, Epermits, Map, Events, Electric } from "./pages";
+import { Home, Epermits, Map, Events, Electric, VehiclePermit } from "./pages";
 import logo from "./assets/parkstash_logo.png";
 import { useSelector } from "react-redux";
 import { Client as ClientType } from "./store/reducer/clients";
@@ -60,10 +60,17 @@ function App() {
               />
             ))
           )}
+
           <Route path="/" render={() => <Login authenticate={() => setState({ ...state, auth: true })} />} />
         </Switch>
       ) : (
         <Switch>
+
+          <Route
+              exact
+              path={`/e-permits/vehicle`}
+              render={() => <VehiclePermit  />}
+            />
           {clients.map((c: ClientType) => (
             <Route
               exact
@@ -79,7 +86,6 @@ function App() {
               render={() => <Visitor permit={p as any}  rootPermit={p} index={i}/>}
             />
           ))}
-
 
           {permits.map((p: RootPermit, i) =>
             p.residential?.map((per: Permit, j) => (

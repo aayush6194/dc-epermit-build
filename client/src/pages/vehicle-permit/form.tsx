@@ -5,43 +5,32 @@ import { Input, DatePicker, Select } from "antd";
 import { gradient, primaryColor } from "../../config";
 import { moment } from "../../utils/time";
 import { useDispatch, useSelector } from "react-redux";
-import { addPermit ,addResidence} from "../../store/actions/permits";
-import api from "../../api";
 import { ParkingLot, Zone } from "../../store/actions/clients";
 import { PermitType } from "../../store/reducer/permit";
 import { Client } from "../../store/reducer/clients";
 import { useParams } from "react-router";
-import random from "../../utils/random";
+import { addVehiclePermit } from "../../store/actions/vehicle-permit";
 
 const defaultValue = {
-  firstName: "",
-  lastName: "",
+  
   liscensePlate: "",
-  email: "",
+ 
   starts: moment().set("minute", 0).format("ddd, MMM DD, YYYY @ hh:mm A"),
   ends: moment()
     .set("minute", 0)
     .set('year', 2023)
+    .add('hour', 1)
     .format("ddd, MMM DD, YYYY @ hh:mm A"),
-  phone: "",
+  
   done: false,
-  id: random(6),
+  id: "2NE345678",
   employer: 0,
-  type: PermitType.Residential,
+  type: PermitType.Visitor,
   zone: Zone.R1,
   parkingLot: ParkingLot.Lot1,
 };
 
-const Form = ({ admin, header, onSubmit, link, partial, length, defaultValues, rootPermitId }: {
-  admin: boolean,
-   header?: any,
-    onSubmit?: any,
-     link?: string, 
-     partial?: any, 
-     length?: any,
-     defaultValues?: any
-     rootPermitId?: any;
-}) => {
+const Form = ({onSubmit }: any) => {
   const [user, setUser] = useState<any>(defaultValue);
   const submit = (values: any) => {
     setUser(values);
@@ -49,9 +38,9 @@ const Form = ({ admin, header, onSubmit, link, partial, length, defaultValues, r
   };
   const reset = () => setUser(defaultValue);
   return user.done ? (
-    <Message reset={reset} user={user} admin={admin} />
+    <Message reset={reset} user={user} />
   ) : (
-    <FormComp defaultValues={defaultValues} rootPermitId={rootPermitId} submit={submit} admin={admin} header={header} dontAdd={!!onSubmit} link={link} partial={partial} length={length}/>
+    <FormComp submit={submit} />
   );
 };
 
@@ -65,7 +54,7 @@ export const Message = ({
   generate,
 }: any) => {
   return (
-    <Grid placeSelf="center" gridGap="2em" style={style}>
+    <Grid placeSelf="start center" gridGap="2em" style={style}>
       <i
         className="fas fa-check-circle"
         style={{ color: primaryColor, fontSize: "6em" }}
@@ -85,7 +74,7 @@ export const Message = ({
               .
             </b>
           </Text>
-          <Text>Confirmation details have been sent to your email.</Text>
+        
         </>
       ) : generate ? (
         <Text>
@@ -121,37 +110,23 @@ export const Message = ({
   );
 };
 type Values =
-  | "firstName"
-  | "lastName"
   | "liscensePlate"
-  | "email"
+  | 'duration'
   | "starts"
-  | "ends"
-  | "phone";
+  | "ends";
 
 const vehicleFields = [
   {
-    id: "firstName",
-    label: "First Name",
-    placeholder: "Ex: John",
-  },
-  {
-    id: "lastName",
-    label: "Last Name",
-    placeholder: "Ex: Doe",
+    id: "liscensePlate",
+    label: "Your Vehicle License Plate #",
+    placeholder: "Ex: 293DEF",
   },
 
   {
-    id: "email",
-    label: "Email Address",
-    placeholder: "Ex: johndoe@gmail.com",
+    id: "duration",
+    label: "Duration",
+    placeholder: "Ex: 293DEF",
   },
-
-  {
-    id: "phone",
-    label: "Your Phone number",
-  },
-
   {
     id: "starts",
     label: "E-Permit Start Date & Time",
@@ -162,16 +137,12 @@ const vehicleFields = [
     id: "ends",
     label: "E-Permit End Date & Time",
   },
-  {
-    id: "liscensePlate",
-    label: "Your Vehicle License Plate #",
-    placeholder: "Ex: 293DEF",
-  },
+
 ] as any;
 
 const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [], defaultValues, rootPermitId}: any) => {
-  const dispatch = useDispatch();
   const { clients } = useSelector((state: any) => state.clients);
+  const dispatch = useDispatch();
   let { id } = useParams() as any;
   const isCompleting = defaultValues? true: false;
   const {
@@ -183,31 +154,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
   } = useFormik({
     initialValues: {...defaultValue, ...defaultValues, isCompleting},
     async onSubmit(values) {
-      if(!dontAdd){
-        if(rootPermitId){
-          dispatch(addResidence(values, rootPermitId, values.type));
-        } else {
-          dispatch(addPermit(values));
-        }
-       
-      }
-      
-      api
-        .sendEmail({
-          firstName: values.firstName,
-          lastName: values.lastName,
-          email: values.email,
-          licensePlate: values.liscensePlate,
-          phone: values.phone,
-          end: values.ends,
-          type: values.type,
-          vaccine: clients[0]?.vaccine,
-          date: moment(values.starts).toISOString(),
-          location: clients[0]?.name,
-          space: 1,
-          link: partial? link + `/sub-${values.type === 'Residential'? 'resident': 'visitor'}/${values.type === 'Residential'? length[0]: length[1]}` : link
-        })
-        .catch((e) => console.log(e));
+      dispatch(addVehiclePermit(values))
       submit({ ...values, done: true });
     },
   });
@@ -221,15 +168,9 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
   }, []);
 
   const patients = clients[0]?.parkingSpace || 10;
-  const error = 
-  admin? (!values.email &&  !values.phone):
-  vehicleFields.reduce(
-    (acc: boolean, { id }: any) =>
-      acc || Boolean(errors[id as Values]) || !values[id as Values],
-    false
-  );
+  const error = !values.liscensePlate;
   return (
-    <Grid placeSelf="center" placeItems="start center" gridGap="1.5em">
+    <Grid placeSelf="start center" placeItems="start center" gridGap="1.5em">
       <Grid placeItems="stretch" placeSelf="stretch">
         {!admin ? (
           <>
@@ -259,46 +200,75 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
       </Grid>
       <form onSubmit={handleSubmit}>
         <Grid placeItems="stretch" cols="2" gridGap="2em 4em">
-          
-        {admin? 
-        <>
-        <div style={{ paddingTop: ".5em" }}>
-            <Text textAlign="left" color={primaryColor} bold>
-              Email
-            </Text>
-
-            <Input
+      
+       
+          {vehicleFields.map(
+            ({
+              id,
+              label,
+              placeholder,
+            }: {
+              id: Values;
+              label: string;
+              type: string | undefined;
+              placeholder: string;
+            }) => (
+              <div style={{ paddingTop: ".5em" }} key={id}>
+                
+                  <Text textAlign="left" color={primaryColor} bold>
+                    {label}
+                  </Text>
+                
+                {id === "starts" || id === "ends" ? (
+                  <DatePicker
+                    format="ddd, MMM, DD, YYYY, hh:mm a"
+                    showTime={{ format: "hh:mm A" }}
+                    minuteStep={15}
+                    disabled
                     style={{ minWidth: "20vw", background: "transparent" }}
-                    name={'email'}
-                    value={values.email}
-                    onChange={handleChange}
-                    placeholder={"Enter the Email"}
+                    onChange={(e) =>
+                      setFieldValue(
+                        id,
+                        e?.format("ddd, MMM DD, YYYY @ hh:mm A")
+                      )
+                    }
+                    value={moment(values[id])}
                   />
-          </div>
-
-
-          <div style={{ paddingTop: ".5em" }}>
-            <Text textAlign="left" color={primaryColor} bold>
-              Phone #
-            </Text>
-
-            <Input
+                ) :
+                id === "duration"?   
+                
+            (<Select
+            style={{ width: "100%" }}
+            defaultValue='1 hour'
+            onChange={(e) => {
+              const hour = Number(e) || 1;
+              setFieldValue('ends', moment(values.starts).add('hour', hour).format("ddd, MMM DD, YYYY @ hh:mm A"))
+            }}
+          >
+            {[1,2,3].map((v) => (
+              <Select.Option value={v}>{v} hour</Select.Option>
+            ))}
+          </Select>):
+                (
+                  <Input
                     style={{ minWidth: "20vw", background: "transparent" }}
-                    name={'phone'}
-                    value={values.phone}
+                    name={id}
+                    disabled={defaultValues? defaultValues[id]? true: false : false}
+                    value={values[id]}
                     onChange={handleChange}
-                    placeholder={"Enter the Phone Number"}
+                    placeholder={placeholder}
                   />
-          </div>
-        </>
-        :
-        <>
-        <div style={{ paddingTop: ".5em" }}>
+                )}
+              </div>
+            )
+          )}
+ <div style={{ paddingTop: ".5em" }}>
             <Text textAlign="left" color={primaryColor} bold>
               Permit Type
             </Text>
 
             <Select
+              disabled
               style={{ width: "100%" }}
               value={values.type}
               onChange={(e) => setFieldValue("type", e) }
@@ -315,9 +285,9 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
             </Text>
 
             <Select
+              disabled
               style={{ width: "100%" }}
               value={values.employer}
-              disabled={id !== undefined}
               onChange={(e) => setFieldValue("employer", e)}
             >
               {clients.map((v: Client, i: number) => (
@@ -325,69 +295,23 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
               ))}
             </Select>
           </div>
-          {vehicleFields.map(
-            ({
-              id,
-              label,
-              placeholder,
-            }: {
-              id: Values;
-              label: string;
-              type: string | undefined;
-              placeholder: string;
-            }) => (
-              <div style={{ paddingTop: ".5em" }} key={id}>
-                {id === "liscensePlate" && admin ? (
-                  <Text textAlign="left" color={primaryColor} bold>
-                    Vehicle License Plate #
-                  </Text>
-                ) : (
-                  <Text textAlign="left" color={primaryColor} bold>
-                    {label}
-                  </Text>
-                )}
-                {id === "starts" || id === "ends" ? (
-                  <DatePicker
-                    format="ddd, MMM, DD, YYYY, hh:mm a"
-                    showTime={{ format: "hh:mm A" }}
-                    minuteStep={15}
-            
-                    style={{ minWidth: "20vw", background: "transparent" }}
-                    onChange={(e) =>
-                      setFieldValue(
-                        id,
-                        e?.format("ddd, MMM DD, YYYY @ hh:mm A")
-                      )
-                    }
-                    value={moment(values[id])}
-                  />
-                ) : (
-                  <Input
-                    style={{ minWidth: "20vw", background: "transparent" }}
-                    name={id}
-                    disabled={defaultValues? defaultValues[id]? true: false : false}
-                    value={values[id]}
-                    onChange={handleChange}
-                    placeholder={placeholder}
-                  />
-                )}
-              </div>
-            )
-          )}
-
           <div style={{ paddingTop: ".5em" }}>
             <Text textAlign="left" color={primaryColor} bold>
               City
             </Text>
 
             <Select
+              disabled
               style={{ width: "100%" }}
               defaultValue={defaultLocation}
-              disabled={id !== undefined}
               onChange={(e) => setFieldValue("zone", e)}
             >
               <Select.Option value={defaultLocation}>
                 {defaultLocation}
+              </Select.Option>
+
+              <Select.Option value={'Palo Alto'}>
+                {'Palo Alto'}
               </Select.Option>
             </Select>
           </div>
@@ -399,9 +323,9 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
             </Text>
 
             <Select
+              disabled
               style={{ width: "100%" }}
               value={values.zone}
-              disabled={id !== undefined}
               onChange={(e) => setFieldValue("zone", e)}
             >
               {Object.values(Zone).map((v) => (
@@ -409,7 +333,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
               ))}
             </Select>
           </div>
-          </>}
+         
           <div style={{ gridColumn: "span 2", display: "grid" }}>
             <Button.Normal
               style={{

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Permit, PermitType, RootPermit } from "../../../../store/reducer/permit";
 import { removePermit } from "../../../../store/actions/permits";
 import { useParams } from "react-router";
+import { permitColumns } from "../../../permits/history";
 
 enum HistoryState {
   ACTIVE = "ACTIVE",
@@ -55,18 +56,7 @@ const History = ({ permit }: { permit?: RootPermit }) => {
         active={state.type}
       />
       <br />
-      {state.type === HistoryState.UPCOMING ? (
-        <Table
-          bordered
-          pagination={{ pageSize: 25 }}
-          dataSource={[
-            permit,
-            ...permit.residential,
-            ...permit.visitor
-          ]}
-          columns={upcommingColumns(clients, id) as any}
-        />
-      ) : (
+      { (
         <Table
           bordered
           style={{ maxWidth: '100%', overflowX: 'scroll'}}
@@ -78,7 +68,7 @@ const History = ({ permit }: { permit?: RootPermit }) => {
             ...permit.visitor
           ]}
           columns={
-            columns((e: any) => openPermit(e, checked), clients, (p: RootPermit)=> dispatch(removePermit(p)), id)}
+            permitColumns((e: any) => openPermit(e, checked), clients, (p: RootPermit)=> dispatch(removePermit(p)), id)}
         />
       )}
     </>
@@ -169,239 +159,5 @@ const Modall = ({ close, checked, permit, second_vaccine }: any) => {
   );
 };
 
-const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)=> void, id: any) => [
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Permit Type
-        <Select style={{ width: 65 }} defaultValue="All">
-          <Select.Option value={"Residential"}>Residential</Select.Option>
-          <Select.Option value={"Visitor"}>Visitor</Select.Option>
-        </Select>
-      </Grid>
-    ),
-    dataIndex: "type",
-  },
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-      Address
-        <Select style={{ width: 65 }} defaultValue="All">
-          <Select.Option value={"Moderna"}>Beltville, MD</Select.Option>
-        </Select>
-      </Grid>
-    ),
-    render: (c: Permit, a: any, i: number)=> 'Beltville, MD'
-  },
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        E-Permit ID
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 50 }} />
-      </Grid>
-    ),
-    render: (p: Permit)=> p?._id?.substring(0,5)
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        First Name
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 50 }} />
-      </Grid>
-    ),
-    dataIndex: "firstName",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Last Name
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 50 }} />
-      </Grid>
-    ),
-    dataIndex: "lastName",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Email
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 80 }} />
-      </Grid>
-    ),
-    dataIndex: "email",
-  },
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Phone Number
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 80 }} />
-      </Grid>
-    ),
-    render: (i: any) => i.phone || "623-143-9124",
-  },
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Zone
-        <Select style={{ width: 60 }} defaultValue="All" />
-      </Grid>
-    ),
-    dataIndex: "zone",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        License Plate #
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
-      </Grid>
-    ),
-    dataIndex: "liscensePlate",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-       Start Date
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 100 }} />
-      </Grid>
-    ),
-    dataIndex: "starts",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        End Date
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 100 }} />
-      </Grid>
-    ),
-    dataIndex: "ends",
-  },
-
-
-
-
-  {
-    title: "Actions",
-    render: (i: Permit) => (
-      <>
-        <Button rounded onClick={() => openBooking(i)} disabled={i.type === PermitType.Visitor}>
-          Approve
-        </Button>
-        <Popconfirm
-          title='Are you sure you want to cancel the permit?'
-         onConfirm={() => removePermit(i)}
-        >
-        <Button rounded  bg='red'>
-          Reject
-        </Button>
-        </Popconfirm>  
-      </>
-    ),
-  },
-];
-
-const upcommingColumns = (clients: Client[], id: any) => [
-  {
-    title: () => (
-      <Grid placeItems="center start">
-       Permit Type
-        <Select style={{ width: 65 }} defaultValue="All">
-          <Select.Option value={"Moderna"}>Employee</Select.Option>
-          <Select.Option value={"Pfizer"}>Handicap</Select.Option>
-        </Select>
-      </Grid>
-    ),
-    dataIndex: "type",
-  },
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-      Employer
-        <Select style={{ width: 65 }} defaultValue="All">
-          <Select.Option value={"Moderna"}>Apple Store</Select.Option>
-        </Select>
-      </Grid>
-    ),
-    render: (c: Permit)=> {
-      if(id && Number(id) >= 0){
-        const index = Number(id) - 1;
-        if(clients?.length > (index + 1)){
-          return clients[index].name
-        }
-        return '10412 TULSA DRIVE'
-      }
-      return '10412 TULSA DRIVE'
-    }
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        E-Permit ID
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
-      </Grid>
-    ),
-    dataIndex: "ePermit",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        First Name
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
-      </Grid>
-    ),
-    dataIndex: "firstName",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Last Name
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
-      </Grid>
-    ),
-    dataIndex: "lastName",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Email
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 80 }} />
-      </Grid>
-    ),
-    dataIndex: "email",
-  },
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Phone Number
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 80 }} />
-      </Grid>
-    ),
-    render: (i: any) => i.phone || "623-143-9124",
-  },
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        License Plate #
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
-      </Grid>
-    ),
-    dataIndex: "liscensePlate",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Appointment Date
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 100 }} />
-      </Grid>
-    ),
-    render: (i: any) => 
-    moment(i.starts).add('days', 7 ).format('ddd, MMM DD, YYYY @ hh:mm A'),
-  },
-];
 
 export default History;

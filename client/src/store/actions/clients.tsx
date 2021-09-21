@@ -92,7 +92,7 @@ export const defaultClients: Client[] = [
   },
 ];
 
-const KEY = 'clients';
+const KEY = 'clients-standford';
 const hasClients = () => {
   const clients = localStorage.getItem(KEY);
   try{

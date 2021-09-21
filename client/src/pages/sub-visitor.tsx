@@ -54,7 +54,7 @@ export const PermitCard = ({
   rootPermit: RootPermit
 })=>{
   return  !permit.firstName?
-  <Form admin={false} defaultValues={permit} rootPermitId={rootPermit._id}/>:
+  <Form admin={false} defaultValues={permit} rootPermitId={permit._id === rootPermit._id? undefined: rootPermit._id}/>:
   
   <Card grid>
   <div style={{maxWidth: '90vw', width: 700}}>

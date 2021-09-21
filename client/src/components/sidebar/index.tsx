@@ -7,7 +7,7 @@ import { disabledTxtColor, mobileWidth, primaryColor, primaryTxtColor } from "..
 import { Badge } from "platyplex_ui";
 import { useSelector } from "react-redux";
 import { Enterprise } from "../../model/domain/enterprise";
-import logo from '../../assets/logo.svg'
+import logo from '../../assets/logo.png'
 const Sidebar = ({ routes = [] }) => {
   const location = useLocation().pathname;
 

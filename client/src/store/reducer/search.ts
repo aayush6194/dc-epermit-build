@@ -70,9 +70,9 @@ export default function rootReducer(state = intialState, action: Actions): any {
         return { ...state, 
           addressData: { ...state.addressData, ...action.payload.addressData },
           locations: [...state.locations, {
-            lat: action.payload.addressData.geo.lat,
-            lng: action.payload.addressData.geo.lng,
-            address: action.payload.addressData.formattedAddress
+            lat: action?.payload?.addressData?.geo?.lat,
+            lng: action?.payload?.addressData?.geo?.lng,
+            address: action?.payload?.addressData?.formattedAddress
           }]
       };
     default:

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Avatar, Text as Txt , Header, Grid} from 'platyplex_ui';
 import { mobileWidth,  gradient, disabledTxtColor } from '../../config';
 import { useLocation } from "react-router";
-import logo from '../../assets/parkstash_logo.svg';
+import logo from '../../assets/parkstash_logo.png';
 import { Popover, Menu, Badge } from 'antd';
 
 const TopNavBar = () => {

@@ -16,9 +16,9 @@ interface State {
   error: boolean;
   loading: boolean;
 }
-interface Actions {
+export interface Actions {
   type: ActionTypes;
-  payload: Partial<State> & {
+  payload: Partial<State> & { 
     dispatch: Dispatch;
   };
 }

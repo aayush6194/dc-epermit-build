@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Permit, PermitType, RootPermit } from "../../../store/reducer/permit";
 import { removePermit } from "../../../store/actions/permits";
 import { useParams } from "react-router";
+import random from "../../../utils/random";
 
 enum HistoryState {
   ACTIVE = "ACTIVE",
@@ -25,6 +26,7 @@ const History = ({ client }: { client?: Client }) => {
     checked: false,
   });
   const { clients } = useSelector((state: any) => state.clients);
+  const { vehiclePermits } = useSelector((state: any) => state.vehiclePermits);
   const { permits, loading } = useSelector((state: any) => state.permits);
   const setState = (props: any) => setter({ ...state, ...props });
   const checked = () => setState({ checked: true });
@@ -44,7 +46,18 @@ const History = ({ client }: { client?: Client }) => {
     });
     modal.open();
   };
+ 
 
+  const flatPermits = (p: any[] )=>{
+    let arr = [...p];
+    arr.forEach((p: RootPermit)=> {
+      arr = [...arr, ...p.residential]
+      arr = [...arr, ...p.visitor]
+    })
+
+    return arr;
+
+  }
 
   return (
     <>
@@ -57,24 +70,15 @@ const History = ({ client }: { client?: Client }) => {
         active={state.type}
       />
       <br />
-      {state.type === HistoryState.UPCOMING ? (
-        <Table
-          bordered
-          pagination={{ pageSize: 25 }}
-          dataSource={permits.filter((c: any) => c.key === "1" )}
-          columns={upcommingColumns(clients, id) as any}
-        />
-      ) : (
         <Table
           bordered
           style={{ maxWidth: '100%', overflowX: 'scroll'}}
           pagination={{ pageSize: 25 }}
           loading={loading}
-          dataSource={permits}
+          dataSource={[...flatPermits(permits), ...vehiclePermits]}
           columns={
-            columns((e: any) => openPermit(e, checked), clients, (p: RootPermit)=> dispatch(removePermit(p)), id)}
+            permitColumns((e: any) => openPermit(e, checked), clients, (p: RootPermit)=> dispatch(removePermit(p)), id)}
         />
-      )}
     </>
   );
 };
@@ -159,7 +163,7 @@ const Modall = ({ close, checked, permit, second_vaccine }: any) => {
   );
 };
 
-const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)=> void, id: any) => [
+export const permitColumns = (openBooking: any, clients: Client[], removePermit: (p : Permit)=> void, id: any) => [
   {
     title: () => (
       <Grid placeItems="center start">
@@ -178,11 +182,11 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
       <Grid placeItems="center start">
       Address
         <Select style={{ width: 65 }} defaultValue="All">
-          <Select.Option value={"Moderna"}>Beltville, MD</Select.Option>
+          <Select.Option value={'Mountain View'}>Mountain View</Select.Option>
         </Select>
       </Grid>
     ),
-    render: (c: Permit, a: any, i: number)=> 'Beltville, MD'
+    render: (c: Permit, a: any, i: number)=> 'Mountain View'
   },
 
   {
@@ -192,7 +196,7 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
         <Input prefix={<i className="fa fa-search" />} style={{ width: 50 }} />
       </Grid>
     ),
-    render: (p: Permit)=> p?._id?.substring(0,5)
+    render: (p: Permit)=> p?._id? p?._id?.substring(p?._id?.length -5)?.toUpperCase() :   random(5)
   },
   {
     title: () => (
@@ -201,7 +205,7 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
         <Input prefix={<i className="fa fa-search" />} style={{ width: 50 }} />
       </Grid>
     ),
-    dataIndex: "firstName",
+    render: (p: any) =>  !p?._id? 'N/A':  p.firstName || <span style={{color: 'coral'}}>Pending</span>,
   },
   {
     title: () => (
@@ -210,7 +214,7 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
         <Input prefix={<i className="fa fa-search" />} style={{ width: 50 }} />
       </Grid>
     ),
-    dataIndex: "lastName",
+    render: (p: any) =>  !p?._id? 'N/A': p.lastName || <span style={{color: 'coral'}}>Pending</span>,
   },
   {
     title: () => (
@@ -219,7 +223,7 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
         <Input prefix={<i className="fa fa-search" />} style={{ width: 80 }} />
       </Grid>
     ),
-    dataIndex: "email",
+    render: (p: any) =>  !p?._id? 'N/A': p.email || <span style={{color: 'coral'}}>Pending</span>,
   },
 
   {
@@ -229,7 +233,7 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
         <Input prefix={<i className="fa fa-search" />} style={{ width: 80 }} />
       </Grid>
     ),
-    render: (i: any) => i.phone || "623-143-9124",
+    render: (p: any) =>  !p?._id? 'N/A': (p.phone || <span style={{color: 'coral'}}>Pending</span>),
   },
 
   {
@@ -248,7 +252,8 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
         <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
       </Grid>
     ),
-    dataIndex: "liscensePlate",
+    render: (i: any) => i.liscensePlate || <span style={{color: 'coral'}}>Pending</span>,
+    
   },
   {
     title: () => (
@@ -270,127 +275,6 @@ const columns = (openBooking: any, clients: Client[], removePermit: (p : Permit)
   },
 
 
-
-  {
-    title: "Actions",
-    render: (i: Permit) => (
-      <>
-        <Button rounded onClick={() => openBooking(i)} disabled={i.type === PermitType.Visitor}>
-          Approve
-        </Button>
-        <Popconfirm
-          title='Are you sure you want to cancel the permit?'
-         onConfirm={() => removePermit(i)}
-        >
-        <Button rounded  bg='red'>
-          Reject
-        </Button>
-        </Popconfirm>  
-      </>
-    ),
-  },
-];
-
-const upcommingColumns = (clients: Client[], id: any) => [
-  {
-    title: () => (
-      <Grid placeItems="center start">
-       Permit Type
-        <Select style={{ width: 65 }} defaultValue="All">
-          <Select.Option value={"Moderna"}>Employee</Select.Option>
-          <Select.Option value={"Pfizer"}>Handicap</Select.Option>
-        </Select>
-      </Grid>
-    ),
-    dataIndex: "type",
-  },
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-      Employer
-        <Select style={{ width: 65 }} defaultValue="All">
-          <Select.Option value={"Moderna"}>Apple Store</Select.Option>
-        </Select>
-      </Grid>
-    ),
-    render: (c: Permit)=> {
-      if(id && Number(id) >= 0){
-        const index = Number(id) - 1;
-        if(clients?.length > (index + 1)){
-          return clients[index].name
-        }
-        return '10412 TULSA DRIVE'
-      }
-      return '10412 TULSA DRIVE'
-    }
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        E-Permit ID
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
-      </Grid>
-    ),
-    dataIndex: "ePermit",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        First Name
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
-      </Grid>
-    ),
-    dataIndex: "firstName",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Last Name
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
-      </Grid>
-    ),
-    dataIndex: "lastName",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Email
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 80 }} />
-      </Grid>
-    ),
-    dataIndex: "email",
-  },
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Phone Number
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 80 }} />
-      </Grid>
-    ),
-    render: (i: any) => i.phone || "623-143-9124",
-  },
-
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        License Plate #
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 65 }} />
-      </Grid>
-    ),
-    dataIndex: "liscensePlate",
-  },
-  {
-    title: () => (
-      <Grid placeItems="center start">
-        Appointment Date
-        <Input prefix={<i className="fa fa-search" />} style={{ width: 100 }} />
-      </Grid>
-    ),
-    render: (i: any) => i.starts === 'N/A'? 'N/A' : 
-    moment(i.starts).add('days', 7 ).format('ddd, MMM DD, YYYY @ hh:mm A'),
-  },
 ];
 
 export default History;
