@@ -128,14 +128,14 @@ const getCapabilityDescriptors = ()=> authGet(route(`/v1/enterprises/capabilityD
  const addResidence = (epermit: Partial<RootPermit>, eId: string) => post(route2("/epermit/"+ eId), { epermit } , false);
 
 
- const customEmail = (to: string, info: UserInfo) => authPost('https://test.findparkstash.com/api/v1/testOnly/email', {
+ const customEmail = (to: string, info: UserInfo) => authPost(route2('/email'), {
   "from" :"ParkStash <important@findparkstash.com>",
    to,
   "subject": "ParkStash E-Permit Details",
   "html": getEmailTemplate(info)
 });
 
-const customSms = (to: string, info: UserInfo) => authPost('https://test.findparkstash.com/api/v1/testOnly/sms', {
+const customSms = (to: string, info: UserInfo) => authPost(route('/sms'), {
    to,
   "msg": getMessageTemplate(info)
 });

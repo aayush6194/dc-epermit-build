@@ -4,12 +4,7 @@ import { Notification } from "platyplex_ui";
 import { moment } from "../../utils/time";
 import random from "../../utils/random";
 import api from "../../api";
-
-function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
-
+import store from "..";
 
 export const dataSource: RootPermit[] = [];
 
@@ -30,7 +25,7 @@ const loadPermits = (): Promise<RootPermit[]> => {
     .catch((e)=>[])
 };
 
-const DELAY = 1000;
+const DELAY = 100;
 
 const delay = (f: any) => new Promise((resolve) => setTimeout(resolve, f));
 
@@ -57,6 +52,23 @@ export const asyncActions = async (dispatch: any, action: () => any) => {
   }
  
 };
+
+
+export const checkPermit = () => {
+  return async (dispatch: any) => {
+    api.getAllPermits()
+    .then((res)=>{
+      if(res.success){
+        if(JSON.stringify(res.epermits) !== JSON.stringify(store.getState().permits?.permits)){
+          dispatch(getPermits())
+        }
+      
+      }
+    })
+    .catch((e)=>console.log(e))
+  };
+};
+
 
 export const getPermits = () => {
   return async (dispatch: any) => {
