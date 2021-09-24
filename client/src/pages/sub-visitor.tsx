@@ -6,6 +6,7 @@ import user from "../assets/user.svg";
 import permitt from "../assets/permit.svg";
 import { Permit, RootPermit } from "../store/reducer/permit";
 import Form from "./client/form";
+import { useSelector } from "react-redux";
 const SubVisitor = ({
   permit,
   rootPermit,
@@ -52,7 +53,8 @@ export const PermitCard = ({
 }: {
   permit: Permit | RootPermit;
   rootPermit: RootPermit
-})=>{
+})=>{  
+  const { clients } = useSelector((state: any) => state.clients);
   return  !permit.firstName?
   <Form admin={false} defaultValues={permit} rootPermitId={permit._id === rootPermit._id? undefined: rootPermit._id}/>:
   
@@ -64,19 +66,20 @@ export const PermitCard = ({
     <Text bold  textAlign="right" color={primaryColor}>
       ({Math.abs(2 - rootPermit.visitor.length)}/2) Visitors Remaining
     </Text>
-  <Card grid shadow customCols='200px 1fr' placeItems='stretch' gridGap='.5em 2em'>
-  <Text bold  textAlign="left" style={{ gridColumn: '1/-1'}}>
+  <Card grid shadow customCols='200px 1fr' placeItems='stretch' gridGap='.3em 2em'>
+  <Text bold  textAlign="left" >
     Epermit ID:  {permit._id?.substring(0,5) || '4GH68943'}
+    </Text>
+    <Text bold textAlign="left" color={primaryColor}>
+     Type :  {permit.type} 
     </Text>
     <img
       src={permitt}
       alt="Mail"
-      style={{ width: 200, margin: "auto" , gridRow: 'span 6'}}
+      style={{ width: 200, margin: "auto" , gridRow: 'span 8'}}
     />
   
-    <Text bold textAlign="left" color={primaryColor}>
-     Type :  {permit.type} 
-    </Text>
+    
     <Text bold textAlign="left">
     Full Name:  {permit.firstName} {permit.lastName}
     </Text>
@@ -88,7 +91,14 @@ export const PermitCard = ({
     <Text bold  textAlign="left">
     Phone #:  {permit.phone}
     </Text>
+    <Text bold  textAlign="left">
+    Department:  {clients[permit.employer]?.name || 'D. School'}
+    </Text>
 
+    <Text bold  textAlign="left">
+    Location:  <a href='href="https://shorturl.at/cgmvQ"' target='_'>
+     Mountain View, CA  <i className='fa fa-map-marker'/> </a>
+    </Text>
     <Text bold textAlign="left">
     Vehicle License Plate #:  {permit.liscensePlate} 
     </Text>

@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/static/js/main.4b22b321.chunk.js",
-    "main.js.map": "/static/js/main.4b22b321.chunk.js.map",
+    "main.js": "/static/js/main.049e5290.chunk.js",
+    "main.js.map": "/static/js/main.049e5290.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.75404bae.js",
     "runtime-main.js.map": "/static/js/runtime-main.75404bae.js.map",
     "static/css/2.45263488.chunk.css": "/static/css/2.45263488.chunk.css",
-    "static/js/2.056996d4.chunk.js": "/static/js/2.056996d4.chunk.js",
-    "static/js/2.056996d4.chunk.js.map": "/static/js/2.056996d4.chunk.js.map",
+    "static/js/2.888f806c.chunk.js": "/static/js/2.888f806c.chunk.js",
+    "static/js/2.888f806c.chunk.js.map": "/static/js/2.888f806c.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.af543f5d52ee0767c6467903eeacefbc.js": "/precache-manifest.af543f5d52ee0767c6467903eeacefbc.js",
+    "precache-manifest.e083cc75692a92c358710ad077e0635f.js": "/precache-manifest.e083cc75692a92c358710ad077e0635f.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.45263488.chunk.css.map": "/static/css/2.45263488.chunk.css.map",
-    "static/js/2.056996d4.chunk.js.LICENSE.txt": "/static/js/2.056996d4.chunk.js.LICENSE.txt",
+    "static/js/2.888f806c.chunk.js.LICENSE.txt": "/static/js/2.888f806c.chunk.js.LICENSE.txt",
     "static/media/CalPolyLogo.png": "/static/media/CalPolyLogo.cbd4b3f8.png",
     "static/media/empty.svg": "/static/media/empty.3e935ffe.svg",
     "static/media/loader.svg": "/static/media/loader.27ca61a6.svg",
@@ -24,7 +24,7 @@
   "entrypoints": [
     "static/js/runtime-main.75404bae.js",
     "static/css/2.45263488.chunk.css",
-    "static/js/2.056996d4.chunk.js",
-    "static/js/main.4b22b321.chunk.js"
+    "static/js/2.888f806c.chunk.js",
+    "static/js/main.049e5290.chunk.js"
   ]
 }

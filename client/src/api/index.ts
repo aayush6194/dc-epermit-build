@@ -28,7 +28,9 @@ export interface UserInfo {
 const getMessageTemplate =(info: UserInfo)=>{
   return `E-Permit request confirmation: ${info.id}. \n
   Hi ${info.firstName}, your request for E-permit from the ${ENTERPRISE} ${info.department? "(" +info.department+ ")": ""} has been confirmed with ParkStash and it starts at ${info.starts} and ends on ${info.ends}. More detail has been sent to your email.
-  Navigate here: ${info.link}`;
+  Permit Link: ${info.link} \n
+  Navigation Link: https://shorturl.at/cgmvQ
+  `;
 }
 
 interface Body {

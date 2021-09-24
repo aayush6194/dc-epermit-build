@@ -735,7 +735,7 @@ export const getEmailTemplate = (reciever: UserInfo)=>`
                                   <tbody>
                                       <tr>
                                           <td align="center" valign="middle" class="mcnButtonContent" style="font-family: &quot;Merriweather Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; padding: 15px;">
-                                              <a class="mcnButton " title="Navigate" href="https://www.google.com/maps/@32.7938295,-97.1898033/vmth+uc+davis/@34.1136636,-127.5637809,4z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x8085291d3f0b8f1f:0x8a430e229f05f56e!2m2!1d-121.7628253!2d38.532044" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Navigate</a>
+                                              <a class="mcnButton " title="Navigate" href="https://shorturl.at/cgmvQ" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Navigate</a>
                                           </td>
                                       </tr>
                                   </tbody>

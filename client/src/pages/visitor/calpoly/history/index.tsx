@@ -68,7 +68,7 @@ const History = ({ permit }: { permit?: RootPermit }) => {
             ...permit.visitor
           ]}
           columns={
-            permitColumns((e: any) => openPermit(e, checked), clients, (p: RootPermit)=> dispatch(removePermit(p)), id)}
+            permitColumns(clients, (p: RootPermit)=> dispatch(removePermit(p)))}
         />
       )}
     </>

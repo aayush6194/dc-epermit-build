@@ -10,6 +10,7 @@ import { Permit, PermitType, RootPermit } from "../../../store/reducer/permit";
 import { removePermit } from "../../../store/actions/permits";
 import { useParams } from "react-router";
 import random from "../../../utils/random";
+import store from "../../../store";
 
 enum HistoryState {
   ACTIVE = "ACTIVE",
@@ -19,7 +20,6 @@ enum HistoryState {
 }
 
 const History = ({ client }: { client?: Client }) => {
-  const admin = !client;
   let { id } = useParams<{id: any}>();
   const [state, setter] = useState({
     type: HistoryState.ACTIVE,
@@ -29,23 +29,8 @@ const History = ({ client }: { client?: Client }) => {
   const { vehiclePermits } = useSelector((state: any) => state.vehiclePermits);
   const { permits, loading } = useSelector((state: any) => state.permits);
   const setState = (props: any) => setter({ ...state, ...props });
-  const checked = () => setState({ checked: true });
+
   const dispatch = useDispatch();
-  const openPermit = async (permit: any, checked: any) => {
-    const modal = Modal({
-      title: "",
-      modal: (
-        <Modall 
-          permit={permit} 
-          second_vaccine={7}
-          checked={checked} 
-          close={() => modal.close()} 
-        />
-      ),
-      hideCancel: true,
-    });
-    modal.open();
-  };
  
 
   const flatPermits = (p: any[] )=>{
@@ -77,7 +62,7 @@ const History = ({ client }: { client?: Client }) => {
           loading={loading}
           dataSource={[...flatPermits(permits), ...vehiclePermits]}
           columns={
-            permitColumns((e: any) => openPermit(e, checked), clients, (p: RootPermit)=> dispatch(removePermit(p)), id)}
+            permitColumns(clients, (p: RootPermit)=> dispatch(removePermit(p)))}
         />
     </>
   );
@@ -163,7 +148,7 @@ const Modall = ({ close, checked, permit, second_vaccine }: any) => {
   );
 };
 
-export const permitColumns = (openBooking: any, clients: Client[], removePermit: (p : Permit)=> void, id: any) => [
+export const permitColumns = (clients: Client[], removePermit: (p : Permit)=> void) => [
   {
     title: () => (
       <Grid placeItems="center start">
@@ -186,7 +171,7 @@ export const permitColumns = (openBooking: any, clients: Client[], removePermit:
         </Select>
       </Grid>
     ),
-    render: (c: Permit, a: any, i: number)=> 'Mountain View'
+    render: (c: Permit, a: any, i: number)=> 'Mountain View, CA'
   },
 
   {
@@ -239,11 +224,11 @@ export const permitColumns = (openBooking: any, clients: Client[], removePermit:
   {
     title: () => (
       <Grid placeItems="center start">
-        Zone
+        Department
         <Select style={{ width: 60 }} defaultValue="All" />
       </Grid>
     ),
-    dataIndex: "zone",
+    render: (i)=> clients[i.employer || 0]?.name || 'D. School',
   },
   {
     title: () => (
