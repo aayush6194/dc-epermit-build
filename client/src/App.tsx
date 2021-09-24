@@ -21,7 +21,9 @@ function App() {
     auth: false,
   });
   const { clients } = useSelector((s: any) => s.clients);
-  const { permits }: { permits: RootPermit[] } = useSelector((s: any) => s.permits);
+  const { permits }: { permits: RootPermit[] } = useSelector(
+    (s: any) => s.permits
+  );
   useEffect(() => {
     const auth = Boolean(localStorage.getItem("AUTH"));
     setTimeout(() => setState({ ...state, loading: false, auth }), 2000);
@@ -38,7 +40,12 @@ function App() {
                 key={i + "" + j}
                 path={`/visitor/${i}/sub-resident/${j}`}
                 render={() => (
-                  <Visitor index={i}  permit={per} rootPermit={p} name={per.firstName} />
+                  <Visitor
+                    index={i}
+                    permit={per}
+                    rootPermit={p}
+                    name={per.firstName}
+                  />
                 )}
               />
             ))
@@ -61,16 +68,20 @@ function App() {
             ))
           )}
 
-          <Route path="/" render={() => <Login authenticate={() => setState({ ...state, auth: true })} />} />
+          <Route
+            path="/"
+            render={() => (
+              <Login authenticate={() => setState({ ...state, auth: true })} />
+            )}
+          />
         </Switch>
       ) : (
         <Switch>
-
           <Route
-              exact
-              path={`/e-permits/vehicle`}
-              render={() => <VehiclePermit  />}
-            />
+            exact
+            path={`/e-permits/vehicle`}
+            render={() => <VehiclePermit />}
+          />
           {clients.map((c: ClientType) => (
             <Route
               exact
@@ -83,7 +94,9 @@ function App() {
             <Route
               exact
               path={"/visitor/" + i}
-              render={() => <Visitor permit={p as any}  rootPermit={p} index={i}/>}
+              render={() => (
+                <Visitor permit={p as any} rootPermit={p} index={i} />
+              )}
             />
           ))}
 
@@ -94,7 +107,12 @@ function App() {
                 key={i + "" + j}
                 path={`/visitor/${i}/sub-resident/${j}`}
                 render={() => (
-                  <Visitor index={i}  name={per.firstName} permit={per} rootPermit={p}/>
+                  <Visitor
+                    index={i}
+                    name={per.firstName}
+                    permit={per}
+                    rootPermit={p}
+                  />
                 )}
               />
             ))
@@ -121,7 +139,11 @@ function App() {
           <Route exact path="/e-permits" render={() => <Epermits />} />
           <Route exact path="/map" render={() => <Map />} />
           <Route exact path="/legal" render={() => <Legal />} />
-          <Route exact path="/enforment-electric-vehicles-dashboard" render={() => <Electric />} />
+          <Route
+            exact
+            path="/enforment-electric-vehicles-dashboard"
+            render={() => <Electric />}
+          />
           <Route exact path="/help" render={() => <Help />} />
           <Route path="/" render={() => <Home />} />
         </Switch>
@@ -131,6 +153,5 @@ function App() {
     <Loader.Custom logo={logo} />
   );
 }
-
 
 export default App;

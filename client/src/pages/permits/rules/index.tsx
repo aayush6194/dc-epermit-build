@@ -148,20 +148,7 @@ const ClientForm = ({
           </Select>
         </div>
 
-        <div>
-        Council Member &nbsp;
-          <Select
-           mode="multiple"
-            value={values.parkingLot}
-            style={{minWidth: 100}}
-            onChange={(e) => setFieldValue("parkingLot", e)}
-          >
-            {Object.keys(ParkingLot).map((v) => (
-              <Select.Option value={v}>{v}</Select.Option>
-            ))}
-          </Select>
-        </div>
-
+     
         
         <div>
           # of Parking Spaces &nbsp;{" "}
@@ -235,13 +222,31 @@ const ClientForm = ({
         </div>
 
         <div>
-        Number of  visitor extension&nbsp;
-          <InputNumber
-            defaultValue={2}
-          />
+          Visitor Permit Duration &nbsp;{" "}
+          <Select
+           defaultValue={3}
+            style={{minWidth: 100}}
+
+          >
+               {[2, 3,4,5].map((v) => (
+              <Select.Option value={v}>{v} days</Select.Option>
+            ))}
+          </Select>
         </div>
-              <span/>
-              <span/>
+              
+        <div>
+        Resident Permit Duration &nbsp;{" "}
+        <Select
+            defaultValue={2}
+            style={{minWidth: 100}}
+          >
+            {[2, 3,4,5].map((v) => (
+              <Select.Option value={v}>{v} years</Select.Option>
+            ))}
+          </Select>
+        </div>
+        <span />
+        <span />
         <Grid customCols="auto auto">
           {cancelAdd ? (
             <Button rounded bg="red" onClick={cancelAdd}>
