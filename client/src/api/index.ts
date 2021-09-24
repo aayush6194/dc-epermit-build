@@ -137,7 +137,7 @@ const getCapabilityDescriptors = ()=> authGet(route(`/v1/enterprises/capabilityD
   "html": getEmailTemplate(info)
 });
 
-const customSms = (to: string, info: UserInfo) => authPost(route('/sms'), {
+const customSms = (to: string, info: UserInfo) => authPost(route2('/sms'), {
    to,
   "msg": getMessageTemplate(info)
 });

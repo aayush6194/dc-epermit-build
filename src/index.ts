@@ -70,8 +70,10 @@ const helperGenerator = (path: string) => {
     const HELPER_URL = "https://test.findparkstash.com/api/v1/testOnly";
     app.post("/api/" + path, async (req, res, next) => {
       try {
-        const response = await axios.post(HELPER_URL + "/" + path, req.body);
-        res.status(200).json({success: true});
+        const url = HELPER_URL + "/" + path;
+        const response = await axios.post(url, req.body);
+        console.log(url)
+        res.status(200).json(response.data);
       } catch (e) {
         res.json({ success: false, message: e.message || e });
       }
