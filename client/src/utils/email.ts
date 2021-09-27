@@ -11,6 +11,10 @@ export const getEmailTemplate = (reciever: UserInfo)=>`
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
     <style type="text/css">
+	div {
+		
+		color: black !important;
+	}
 		p{
 			margin:10px 0;
 			padding:0;
@@ -697,7 +701,7 @@ export const getEmailTemplate = (reciever: UserInfo)=>`
                                     Valid Until : <b>${reciever.ends}  </b>              <br />
                                     Confirmation number : <b>${reciever.id}  </b>            <br />
                                     
-									Link: <b><a href="${reciever.link}" style="color: blue;"></a></b>    <br/> <br/>
+									Link: <b><a href="${reciever.link}" style="color: blue;">{${reciever.link}"}</a></b>    <br/> <br/>
                                     If you have any questions, please contact ${ENTERPRISE}(${reciever.department || 'D.School'}) for more details. Please do not reply to this email    <br /><br />
                                     Happy Parking!
                                   </span>
