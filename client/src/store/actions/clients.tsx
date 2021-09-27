@@ -18,7 +18,7 @@ export enum Zone {
 export const defaultClients: Client[] = [
   {
     id: "1",
-    name: "D.School",
+    name: "Computer Science",
     open: true,
     parkingSpace: 65,
     overbooking: true,
@@ -55,7 +55,7 @@ export const defaultClients: Client[] = [
 
   {
     id: "3",
-    name: "Computer Science",
+    name: "D. School",
     open: false,
     parkingSpace: 100,
     overbooking: true,

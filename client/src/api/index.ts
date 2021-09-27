@@ -1,6 +1,6 @@
 
 import { post, authGet, authPost, customPost, authUpload, get, authDelete , deleteReq} from './request';
-import { API, API2, ENTERPRISE, googleAPIKey  } from '../config'
+import { API, API2, ENTERPRISE, ENTERPRISE_GEO_LOCATION_URL, googleAPIKey  } from '../config'
 import { EditAnnouncement, AddAnnouncement } from '../model/domain/announcements';
 import { Garage, UpdateGarageModel, GarageOccupancyTable, AddGarageModel } from '../model/domain/garage';
 import { FlatValue, TimeSeries } from '../model/domain/metrics';
@@ -29,7 +29,7 @@ const getMessageTemplate =(info: UserInfo)=>{
   return `E-Permit request confirmation: ${info.id}. \n
   Hi ${info.firstName}, your request for E-permit from the ${ENTERPRISE} ${info.department? "(" +info.department+ ")": ""} has been confirmed with ParkStash and it starts at ${info.starts} and ends on ${info.ends}. More detail has been sent to your email.
   Permit Link: ${info.link} \n
-  Navigation Link: https://shorturl.at/cgmvQ
+  Navigation Link: ${ENTERPRISE_GEO_LOCATION_URL}
   `;
 }
 

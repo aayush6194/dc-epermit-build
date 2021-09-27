@@ -167,11 +167,11 @@ export const permitColumns = (clients: Client[], removePermit: (p : Permit)=> vo
       <Grid placeItems="center start">
       Address
         <Select style={{ width: 65 }} defaultValue="All">
-          <Select.Option value={'Mountain View'}>Mountain View</Select.Option>
+          <Select.Option value={'Palo Alto, CA'}>Palo Alto, CA</Select.Option>
         </Select>
       </Grid>
     ),
-    render: (c: Permit, a: any, i: number)=> 'Mountain View, CA'
+    render: (c: Permit, a: any, i: number)=> 'Palo Alto, CA'
   },
 
   {
@@ -228,7 +228,7 @@ export const permitColumns = (clients: Client[], removePermit: (p : Permit)=> vo
         <Select style={{ width: 60 }} defaultValue="All" />
       </Grid>
     ),
-    render: (i)=> clients[i.employer || 0]?.name || 'D. School',
+    render: (i)=> clients[i.employer || 0]?.name || 'Computer Science',
   },
   {
     title: () => (

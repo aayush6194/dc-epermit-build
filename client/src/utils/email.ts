@@ -1,5 +1,5 @@
 import { UserInfo } from "../api";
-import { ENTERPRISE, ENTERPRISE_IMG_URL } from "../config";
+import { ENTERPRISE, ENTERPRISE_GEO_LOCATION_URL, ENTERPRISE_IMG_URL } from "../config";
 import random from "./random";
 
 export const getEmailTemplate = (reciever: UserInfo)=>`
@@ -696,13 +696,13 @@ export const getEmailTemplate = (reciever: UserInfo)=>`
 									Your License plate #: <b>${reciever.licensePlate} </b>                      <br />
 									`: ""}
                             
-                                    Issued By: <b>${ENTERPRISE} (${reciever.department || 'D.School'})</b>     <br />
+                                    Issued By: <b>${ENTERPRISE} (${reciever.department || 'Computer Science'})</b>     <br />
                                     Valid From : <b>${reciever.starts}  </b>              <br />
                                     Valid Until : <b>${reciever.ends}  </b>              <br />
                                     Confirmation number : <b>${reciever.id}  </b>            <br />
                                     
-									Link: <b><a href="${reciever.link}" style="color: blue;">{${reciever.link}"}</a></b>    <br/> <br/>
-                                    If you have any questions, please contact ${ENTERPRISE}(${reciever.department || 'D.School'}) for more details. Please do not reply to this email    <br /><br />
+									Link: <b><a href="${reciever.link}" style="color: blue;">${reciever.link}</a></b>    <br/> <br/>
+                                    If you have any questions, please contact ${ENTERPRISE}(${reciever.department || 'Computer Science'}) for more details. Please do not reply to this email    <br /><br />
                                     Happy Parking!
                                   </span>
                                 </span>
@@ -740,7 +740,7 @@ export const getEmailTemplate = (reciever: UserInfo)=>`
                                   <tbody>
                                       <tr>
                                           <td align="center" valign="middle" class="mcnButtonContent" style="font-family: &quot;Merriweather Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 18px; padding: 15px;">
-                                              <a class="mcnButton " title="Navigate" href="https://shorturl.at/cgmvQ" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Navigate</a>
+                                              <a class="mcnButton " title="Navigate" href="${ENTERPRISE_GEO_LOCATION_URL}" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Navigate</a>
                                           </td>
                                       </tr>
                                   </tbody>

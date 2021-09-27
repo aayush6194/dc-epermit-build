@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../layout";
 import { Grid, Card, Text } from "platyplex_ui";
-import { primaryColor } from "../config";
+import { ENTERPRISE_GEO_LOCATION_URL, primaryColor } from "../config";
 import user from "../assets/user.svg";
 import permitt from "../assets/permit.svg";
 import { Permit, RootPermit } from "../store/reducer/permit";
@@ -92,12 +92,12 @@ export const PermitCard = ({
     Phone #:  {permit.phone}
     </Text>
     <Text bold  textAlign="left">
-    Department:  {clients[permit.employer]?.name || 'D. School'}
+    Department:  {clients[permit.employer]?.name || 'Computer Science'}
     </Text>
 
     <Text bold  textAlign="left">
-    Location:  <a href='href="https://shorturl.at/cgmvQ"' target='_'>
-     Mountain View, CA  <i className='fa fa-map-marker'/> </a>
+    Location:  <a href={ENTERPRISE_GEO_LOCATION_URL} target='_'>
+    Palo Alto, CA<i className='fa fa-map-marker'/> </a>
     </Text>
     <Text bold textAlign="left">
     Vehicle License Plate #:  {permit.liscensePlate} 

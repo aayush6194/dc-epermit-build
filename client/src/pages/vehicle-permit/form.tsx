@@ -159,7 +159,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
     },
   });
 
-  const defaultLocation = "Mountain View"
+  const defaultLocation = "Palo Alto, CA"
   useEffect(() => {
     if (id) {
       const index = Number(id) - 1;
