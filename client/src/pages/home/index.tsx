@@ -40,6 +40,7 @@ const Home = () => {
             className="pointer"
             color={loading ? disabledTxtColor : "red"}
             onClick={async () => {
+              window.localStorage.removeItem('clients-standford')
               await api.resetEpermit();
               setTimeout(() => dispatch(getPermits()), 500);
             }}
