@@ -683,7 +683,8 @@ export const getEmailTemplate = (reciever: UserInfo)=>`
                                 <span style="font-size: 20px;">
                                   <span style="font-family: merriweather sans, helvetica neue, helvetica, arial, sans-serif;">
 								
-                                   <b> Hi ${reciever.firstName || reciever.email || reciever.phone},                             <br /><br />
+                                   <b> Hi 
+								   <span style="color: blue;">${reciever.firstName || reciever.email || reciever.phone}</span>,                             <br /><br />
                                     Please see below your parking E-permit reservation details:</b> <br /><br />
 
 									${reciever.firstName? `
@@ -696,7 +697,7 @@ export const getEmailTemplate = (reciever: UserInfo)=>`
                                     Valid Until : <b>${reciever.ends}  </b>              <br />
                                     Confirmation number : <b>${reciever.id}  </b>            <br />
                                     
-									Link: <b>${reciever.link} </b>    <br/> <br/>
+									Link: <b><a href="${reciever.link}" style="color: blue;"></a></b>    <br/> <br/>
                                     If you have any questions, please contact ${ENTERPRISE}(${reciever.department || 'D.School'}) for more details. Please do not reply to this email    <br /><br />
                                     Happy Parking!
                                   </span>

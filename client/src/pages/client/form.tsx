@@ -193,7 +193,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
       }
 
       const info =  {
-        id: values._id || random(5),
+        id: values._id?.substring(values?._id?.length -5)?.toUpperCase()  || random(5),
         isCompleting: values.firstName? true: false,
         firstName: values.firstName,
         lastName: values.lastName,
@@ -205,7 +205,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
         type: values.type,
         department: clients[0]?.vaccine,
         location: clients[0]?.name,
-        link: partial? link + `/sub-${values.type === 'Residential'? 'resident': 'visitor'}/${values.type === 'Residential'? length[0]: length[1]}` : link
+        link: partial? link + `/sub-${values.type === 'Residential'? 'resident': 'visitor'}/${values.type === 'Residential'? length[0]: length[1]}` : (link || window.location.href)
       }
 
       if(values.email){
