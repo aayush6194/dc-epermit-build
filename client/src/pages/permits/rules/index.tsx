@@ -224,12 +224,12 @@ const ClientForm = ({
         <div>
           Visitor Permit Duration &nbsp;{" "}
           <Select
-           defaultValue={3}
+           defaultValue={'1 hour'}
             style={{minWidth: 100}}
 
           >
-               {[2, 3,4,5].map((v) => (
-              <Select.Option value={v}>{v} days</Select.Option>
+               {['1 hour', '2 hours', '3 hours', '6 hours', '1 day', '2 days', '3 days'].map((v) => (
+              <Select.Option value={v}>{v}</Select.Option>
             ))}
           </Select>
         </div>
@@ -240,7 +240,7 @@ const ClientForm = ({
             defaultValue={2}
             style={{minWidth: 100}}
           >
-            {[2, 3,4,5].map((v) => (
+            {[0.5, 1, 2, 3,4,5].map((v) => (
               <Select.Option value={v}>{v} years</Select.Option>
             ))}
           </Select>
