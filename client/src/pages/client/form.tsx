@@ -318,7 +318,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
               onChange={(e) => {
                 setFieldValue("type", e)
                
-                  setFieldValue('ends', moment(values.starts).add('hour', 1).format("ddd, MMM DD, YYYY @ hh:mm A"))
+                  setFieldValue('ends', moment(values.starts).add('hour', 2).format("ddd, MMM DD, YYYY @ hh:mm A"))
               
               }}
             >
