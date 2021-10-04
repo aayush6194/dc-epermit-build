@@ -315,7 +315,12 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
             <Select
               style={{ width: "100%" }}
               value={values.type}
-              onChange={(e) => setFieldValue("type", e) }
+              onChange={(e) => {
+                setFieldValue("type", e)
+               
+                  setFieldValue('ends', moment(values.starts).add('hour', 1).format("ddd, MMM DD, YYYY @ hh:mm A"))
+              
+              }}
             >
               {Object.keys(PermitType).map((v) => (
                 <Select.Option value={v}>{v}</Select.Option>
