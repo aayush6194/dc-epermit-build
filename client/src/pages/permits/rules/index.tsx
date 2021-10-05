@@ -224,7 +224,7 @@ const ClientForm = ({
         <div>
           Visitor Permit Duration &nbsp;{" "}
           <Select
-           defaultValue={'1 hour'}
+           defaultValue={'2 hour'}
             style={{minWidth: 100}}
 
           >
