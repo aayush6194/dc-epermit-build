@@ -15,6 +15,9 @@ import Login from "./pages/login";
 
 export const toRoute = (str: string) => str.toLowerCase().replace(/\s+/g, "-");
 
+
+
+
 function App() {
   const [state, setState] = useState({
     loading: true,
