@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, } from "react-router-dom";
+import { Redirect } from "react-router";
 import ErrorBoundary from "antd/lib/alert/ErrorBoundary";
 import { Loader } from "platyplex_ui";
 import { Home, Epermits, Map, Events, Electric, VehiclePermit } from "./pages";
@@ -148,7 +149,9 @@ function App() {
             render={() => <Electric />}
           />
           <Route exact path="/help" render={() => <Help />} />
-          <Route path="/" render={() => <Home />} />
+
+          <Route exact path="/" render={() => <Home />} />
+          <Redirect to='/'  />
         </Switch>
       )}
     </ErrorBoundary>

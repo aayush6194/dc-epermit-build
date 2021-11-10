@@ -32,4 +32,5 @@ export const defaultLocation =  {lat: 39.02653927586001, lng: -76.95245338598109
 export const token = 'jTVnIl0ahL'
 export const ENTERPRISE = 'Stanford'
 export const ENTERPRISE_IMG_URL = 'https://pbs.twimg.com/profile_images/875395483128049664/8z_jvdLB.jpg'
-export const ENTERPRISE_GEO_LOCATION_URL = 'https://shorturl.at/fvCZ9'
+export const ENTERPRISE_GEO_LOCATION_URL = 'https://shorturl.at/tDLQR'
+//https://www.google.com/maps/dir/?api=1&destination=353+Jane+Stanford+Way,+Stanford,+CA+94305

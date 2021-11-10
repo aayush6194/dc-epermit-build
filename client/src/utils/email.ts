@@ -697,8 +697,8 @@ export const getEmailTemplate = (reciever: UserInfo)=>`
 									`: ""}
                             
                                     Issued By: <b>${ENTERPRISE} (${reciever.department || 'Computer Science'})</b>     <br />
-                                    Valid From : <b>${reciever.starts}  </b>              <br />
-                                    Valid Until : <b>${reciever.ends}  </b>              <br />
+                                    ${reciever.noDate? '':  `From : <b>${reciever.starts}  </b>              <br />
+                                    Valid Until : <b>${reciever.ends}  </b>              <br />` }
                                     Confirmation number : <b>${reciever.id}  </b>            <br />
                                     
 									Link: <b><a href="${reciever.link}" style="color: blue;">${reciever.link}</a></b>    <br/> <br/>

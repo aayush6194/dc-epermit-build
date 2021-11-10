@@ -104,7 +104,7 @@ const Home = () => {
                     </Text>
                     {c.residential?.length === 0 && " None"}
                     {c.residential?.map((p: Permit, j: number) =>
-                      generateUsers(p, j, i)
+                      generateUsers(p, j, i, 'sub-resident')
                     ) || "None"}
                   </div>
                   <div style={{ paddingLeft: "1em", paddingTop: "1em" }}>
@@ -127,12 +127,12 @@ const Home = () => {
   );
 };
 
-const generateUsers = (p: Permit, j: number, i: number) => {
+const generateUsers = (p: Permit, j: number, i: number, type = 'sub-visitor') => {
   const isCompleted = p.firstName ? true : false;
   return (
     <div>
       {j + 1}.&nbsp;
-      <NavLink key={i} target="_" to={`visitor/${i}/sub-resident/${j}`}>
+      <NavLink key={i} target="_" to={`visitor/${i}/${type}/${j}`}>
         {isCompleted ? ` ${p.firstName} ${p.lastName}` : p.email || p.phone}
       </NavLink>
       {!isCompleted && (

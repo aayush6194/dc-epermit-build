@@ -19,6 +19,7 @@ export interface UserInfo {
   type: string;
   phone: string;
   email: string;
+  noDate: boolean;
   location: string;
   link: string;
   isCompleting: boolean;
@@ -27,7 +28,7 @@ export interface UserInfo {
 
 const getMessageTemplate =(info: UserInfo)=>{
   return `E-Permit request confirmation: ${info.id}. \n
-  Hi ${info.firstName}, your request for E-permit from the ${ENTERPRISE} ${info.department? "(" +info.department+ ")": ""} has been confirmed with ParkStash and it starts at ${info.starts} and ends on ${info.ends}. More detail has been sent to your email.
+  Hi ${info.firstName}, your request for E-permit from the ${ENTERPRISE} ${info.department? "(" +info.department+ ")": ""} has been confirmed with ParkStash ${info.noDate? '':  `and it starts at ${info.starts} and ends on ${info.ends}`}. More detail has been sent to your email.
   Permit Link: ${info.link} \n
   Navigation Link: ${ENTERPRISE_GEO_LOCATION_URL}
   `;

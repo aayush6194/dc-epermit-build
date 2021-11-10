@@ -6,7 +6,7 @@ import { gradient, primaryColor } from "../../config";
 import { moment } from "../../utils/time";
 import { useDispatch, useSelector } from "react-redux";
 import { addPermit ,addResidence} from "../../store/actions/permits";
-import api from "../../api";
+import api, { UserInfo } from "../../api";
 import { ParkingLot, Zone } from "../../store/actions/clients";
 import { PermitType } from "../../store/reducer/permit";
 import { Client } from "../../store/reducer/clients";
@@ -192,7 +192,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
        
       }
 
-      const info =  {
+      const info: UserInfo =  {
         id: values._id?.substring(values?._id?.length -5)?.toUpperCase()  || random(5),
         isCompleting: values.firstName? true: false,
         firstName: values.firstName,
@@ -202,6 +202,7 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
         phone: values.phone,
         starts: values.starts,
         ends: values.ends,
+        noDate: admin,
         type: values.type,
         department: clients[0]?.vaccine,
         location: clients[0]?.name,
@@ -317,8 +318,12 @@ const FormComp = ({ submit, admin, header , dontAdd, link, partial, length = [],
               value={values.type}
               onChange={(e) => {
                 setFieldValue("type", e)
-               
+                if(e === PermitType.Residential){
+                  setFieldValue('ends', moment(values.starts).add('hour', 2).add('year', 2).format("ddd, MMM DD, YYYY @ hh:mm A"))
+                } else {
                   setFieldValue('ends', moment(values.starts).add('hour', 2).format("ddd, MMM DD, YYYY @ hh:mm A"))
+                }
+              
               
               }}
             >
