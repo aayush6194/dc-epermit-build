@@ -50,7 +50,7 @@ export const getUser = async (_id?: ObjectId) =>
   getter(userCollection, _id ? { _id } : undefined);
 
 
-export const postUser = async (user: any) => {
+export const postUserr = async (user: any) => {
   return  userCollection.insertOne({
     _id: new ObjectId(),
     ...user

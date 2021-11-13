@@ -100,9 +100,9 @@ app.get("/api/users", async (req, res, next) => {
 app.get("/api/user/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const epermits = await repo.getUser(new ObjectId(id)
+    const user = await repo.getUser(new ObjectId(id)
     );
-    res.status(200).json({ success: true, epermits });
+    res.status(200).json({ success: true, user });
   } catch (e) {
     res.json({ success: false, message: e.message || e });
   }
@@ -112,7 +112,7 @@ app.get("/api/user/:id", async (req, res, next) => {
 app.post("/api/user", async (req, res, next) => {
   const body = req.body;
   try {
-    const added = await repo.postUser(body);
+    const added = await repo.postUserr(body);
 
     res.status(200).json({ success: true });
   } catch (e) {
