@@ -45,14 +45,27 @@ interface PermitDbo extends Permit {
 }
 
 const userCollection: Collection<UserDbo> = db.collection("users-standford");
+
+export const getUser = async (_id?: ObjectId) =>
+  getter(userCollection, _id ? { _id } : undefined);
+
+
+export const postUser = async (user: any) => {
+  return  userCollection.insertOne({
+    _id: new ObjectId(),
+    ...user
+  });
+};
+
+
+
 const epermitCollection: Collection<PermitDbo> =
   db.collection("epermit-standford");
 
 const getter = <T>(collection: Collection<T>, arg?: Partial<T>) =>
   collection.find(arg).toArray();
 
-export const getUser = async (name?: string) =>
-  getter(userCollection, name ? { name } : undefined);
+
 export const getPermit = async (_id?: ObjectId) =>
   getter(epermitCollection, _id ? { _id } : undefined);
 

@@ -87,6 +87,49 @@ const smsApi = helperGenerator("sms");
 emailApi();
 smsApi();
 
+
+app.get("/api/users", async (req, res, next) => {
+  try {
+      const users = await repo.getUser(undefined);
+    res.status(200).json({ success: true, users });
+  } catch (e) {
+    res.json({ success: false, message: e.message || e });
+  }
+});
+
+app.get("/api/user/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const epermits = await repo.getUser(new ObjectId(id)
+    );
+    res.status(200).json({ success: true, epermits });
+  } catch (e) {
+    res.json({ success: false, message: e.message || e });
+  }
+});
+
+
+app.post("/api/user", async (req, res, next) => {
+  const body = req.body;
+  try {
+    const added = await repo.postUser(body);
+
+    res.status(200).json({ success: true });
+  } catch (e) {
+    res.json({ success: false, message: e.message || e });
+  }
+});
+app.post("/api/users/reset", async (req, res, next) => {
+  try {
+    const added = await repo.reset();
+
+    res.status(200).json({ success: true, epermit: added });
+  } catch (e) {
+    res.json({ success: false, message: e.message || e });
+  }
+});
+
+
 app.listen(config.PORT, () => {
   console.log("listening to " + config.PORT);
 });
